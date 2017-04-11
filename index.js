@@ -17,7 +17,7 @@ module.exports = (args) => {
     }
 
     config.app = app
-    config.view = require('./view')(config)
+    config.view = require('./lib/view')(config)
 
     if (args.logging) {
         app.use(require('morgan')('short', {}))
@@ -35,6 +35,6 @@ module.exports = (args) => {
     return {
         app: app,
         listen: listen,
-        router: require('./router')(config)
+        router: require('./lib//router')(config)
     }
 }
