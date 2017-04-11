@@ -1,0 +1,35 @@
+{
+    "name": "dp-node",
+    "version": "0.0.1",
+    "description": "Faster, cheaper, better web framework for Node.js",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/why2pac/dp-node.git"
+    },
+    "keywords": [
+        "MVC",
+        "Web",
+        "Framework",
+        "Express"
+    ],
+    "author": "GONZO",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/why2pac/dp-node/issues"
+    },
+    "homepage": "https://github.com/why2pac/dp-node#readme",
+    "dependencies": {
+        "bluebird": "^3.5.0",
+        "asyncawait": "^1.0.6",
+        "express": "^4.14.1",
+        "body-parser": "^1.17.1",
+        "handlebars": "^4.0.6",
+        "promised-handlebars": "^2.0.1",
+        "fs-promise": "^2.0.2",
+        "morgan": "^1.8.1"
+    }
+}
