@@ -8,6 +8,7 @@ module.exports = (args) => {
     var config = {};
 
     config.cfg = {};
+    config.debug = args.debug == undefined ? true : args.debug;
     config.cfg.controller = args.apppath + '/controller';
     config.cfg.view = args.apppath + '/view';
 
