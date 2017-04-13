@@ -7,10 +7,22 @@ module.exports = (args) => {
     var app = args ? args.app : null;
     var config = {};
 
+    var defaultVal = (val, defaultVal) => {
+        if (val == undefined) {
+            return defaultVal;
+        }
+
+        return val;
+    }
+
+    config.debug = defaultVal(args.debug, true);
+
     config.cfg = {};
-    config.debug = args.debug == undefined ? true : args.debug;
+    config.cfg = {};
+
     config.cfg.controller = args.apppath + '/controller';
     config.cfg.view = args.apppath + '/view';
+    config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(args.minifyRemoveLineBreakWhitespace, true);
 
     config.delegate = {};
     config.delegate.error = args.error || undefined;
