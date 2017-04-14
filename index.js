@@ -10,6 +10,7 @@ const express = require('express');
 |         apppath: String, Application Absolute Path [Required]
 |         port: Int, Binding port, If specified, will bind automatically.
 |         debug: Boolean, Debug Mode, Default is false.
+|         compression: Boolean, Compression, Default is true.
 |         minifyRemoveLineBreakWhitespace: Boolean, Whether if remove line break whitespace or not, Default is true.
 |         error: Function, Error Handler.
 |         logging: Boolean, Logging enabled, Default is false.
@@ -55,6 +56,10 @@ module.exports = (options) => {
 
     if (defaultVal(options.redirectNakedToWWW, false)) {
         app.use(require('./lib/middleware/express-naked-redirect')());
+    }
+
+    if (defaultVal(options.compression, true)) {
+        app.use(require('compression')());
     }
 
     if (options.static) {
