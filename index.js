@@ -3,8 +3,22 @@ global.await = require('asyncawait/await');
 
 const express = require('express');
 
-module.exports = (args) => {
-    var app = args ? args.app : null;
+/*
+|*
+|* @param {Object} [options] {
+|         app: Object, Express App.
+|         apppath: String, Application Absolute Path [Required]
+|         port: Int, Binding port, If specified, will bind automatically.
+|         debug: Boolean, Debug Mode, Default is false.
+|         minifyRemoveLineBreakWhitespace: Boolean, Whether if remove line break whitespace or not, Default is true.
+|         error: Function, Error Handler.
+|         logging: Boolean, Logging enabled, Default is false.
+|         static: [String], Static file paths.
+|       }
+|*
+*/
+module.exports = (options) => {
+    var app = options ? options.app : null;
     var config = {};
 
     var defaultVal = (val, defaultVal) => {
@@ -15,17 +29,17 @@ module.exports = (args) => {
         return val;
     }
 
-    config.debug = defaultVal(args.debug, true);
+    config.debug = defaultVal(options.debug, false);
 
     config.cfg = {};
     config.cfg = {};
 
-    config.cfg.controller = args.apppath + '/controller';
-    config.cfg.view = args.apppath + '/view';
-    config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(args.minifyRemoveLineBreakWhitespace, true);
+    config.cfg.controller = options.apppath + '/controller';
+    config.cfg.view = options.apppath + '/view';
+    config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(options.minifyRemoveLineBreakWhitespace, true);
 
     config.delegate = {};
-    config.delegate.error = args.error || undefined;
+    config.delegate.error = options.error || undefined;
 
     if (!app) {
         app = express();
@@ -34,19 +48,19 @@ module.exports = (args) => {
     config.app = app;
     config.view = require('./lib/view')(config);
 
-    if (args.logging) {
+    if (options.logging) {
         app.use(require('morgan')('short', {}));
     }
 
-    if (args.static) {
-        var paths = args.static;
+    if (options.static) {
+        var paths = options.static;
 
         if (typeof(paths) != 'object') {
             paths = [paths]
         }
 
         paths.forEach((e) => {
-            app.use(express.static(args.apppath + '/' + e))
+            app.use(express.static(options.apppath + '/' + e))
         })
     }
 
@@ -55,8 +69,8 @@ module.exports = (args) => {
         app.listen(port);
     }
 
-    if (args.port) {
-        listen(args.port);
+    if (options.port) {
+        listen(options.port);
     }
 
     return {
