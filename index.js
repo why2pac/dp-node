@@ -14,6 +14,7 @@ const express = require('express');
 |         error: Function, Error Handler.
 |         logging: Boolean, Logging enabled, Default is false.
 |         static: [String], Static file paths.
+|         redirectNakedToWWW: Boolean, Whether redirect naked domain to www  or not, Default is false.
 |       }
 |*
 */
@@ -50,6 +51,10 @@ module.exports = (options) => {
 
     if (options.logging) {
         app.use(require('morgan')('short', {}));
+    }
+
+    if (defaultVal(options.redirectNakedToWWW, false)) {
+        app.use(require('./lib/middleware/express-naked-redirect')());
     }
 
     if (options.static) {

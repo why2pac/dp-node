@@ -32,6 +32,7 @@
         "promised-handlebars": "^2.0.1",
         "fs-promise": "^2.0.2",
         "morgan": "^1.8.1",
-        "html-minifier": "^3.4.3"
+        "html-minifier": "^3.4.3",
+        "parse-domain": "^1.1.0"
     }
 }
