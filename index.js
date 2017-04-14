@@ -11,6 +11,7 @@ const express = require('express');
 |         port: Int, Binding port, If specified, will bind automatically.
 |         debug: Boolean, Debug Mode, Default is false.
 |         compression: Boolean, Compression, Default is true.
+|         enhanceSecurity: Boolean, Security(Helmet), Default is true.
 |         minifyRemoveLineBreakWhitespace: Boolean, Whether if remove line break whitespace or not, Default is true.
 |         error: Function, Error Handler.
 |         logging: Boolean, Logging enabled, Default is false.
@@ -60,6 +61,10 @@ module.exports = (options) => {
 
     if (defaultVal(options.compression, true)) {
         app.use(require('compression')());
+    }
+
+    if (defaultVal(options.enhanceSecurity, true)) {
+        app.use(require('helmet')());
     }
 
     if (options.static) {
