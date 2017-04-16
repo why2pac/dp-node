@@ -35,7 +35,6 @@ module.exports = (options) => {
     config.debug = defaultVal(options.debug, false);
 
     config.cfg = {};
-    config.cfg = {};
 
     config.cfg.controller = options.apppath + '/controller';
     config.cfg.view = options.apppath + '/view';
@@ -43,6 +42,8 @@ module.exports = (options) => {
 
     config.delegate = {};
     config.delegate.error = options.error || undefined;
+
+    config.cfg.viewHelpers = options.viewHelpers || {};
 
     if (!app) {
         app = express();
