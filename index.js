@@ -67,6 +67,8 @@ module.exports = (options) => {
         app.use(require('helmet')());
     }
 
+    app.use('/dp', express.static(__dirname + '/lib/static'));
+
     if (options.static) {
         var paths = options.static;
 
