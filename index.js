@@ -4,6 +4,7 @@ global.await = require('asyncawait/await');
 const express = require('express');
 
 /*
+|* dp for Node
 |*
 |* @param {Object} [options] {
 |         app: Object, Express App.
@@ -35,7 +36,7 @@ module.exports = (options) => {
     config.debug = defaultVal(options.debug, false);
 
     config.cfg = {};
-
+    config.cfg.apppath = options.apppath;
     config.cfg.controller = options.apppath + '/controller';
     config.cfg.view = options.apppath + '/view';
     config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(options.minifyRemoveLineBreakWhitespace, true);
@@ -50,7 +51,6 @@ module.exports = (options) => {
     }
 
     config.app = app;
-    config.view = require('./lib/view')(config);
 
     if (options.logging) {
         app.use(require('morgan')('short', {}));
@@ -91,9 +91,12 @@ module.exports = (options) => {
         listen(options.port);
     }
 
+    config.view = require('./lib/view')(config);
+    config.router = require('./lib/router')(config);
+    config.model = require('./lib/model')(config);
+
     return {
         app: app,
-        listen: listen,
-        router: require('./lib/router')(config)
+        listen: listen
     }
 }
