@@ -18,6 +18,7 @@ const express = require('express');
 |         logging: Boolean, Logging enabled, Default is false.
 |         static: [String], Static file paths.
 |         redirectNakedToWWW: Boolean, Whether redirect naked domain to www  or not, Default is false.
+|         databaseDsn: [Object], Pre-defined database dsn key as `key`, Default is empty.
 |         session: {
 |             driver: String, ENUM('redis'), Session Driver, Default is undefined, disabled.
 |             secret: String, Session Secret, Default is dp provided value.
@@ -84,6 +85,10 @@ module.exports = (options) => {
 
         config.cfg.session.secret = config.cfg.session.secret || 'dR@9oNp0W@r~NoD2';
         config.cfg.session.ttl = config.cfg.session.ttl || 3600*24*30;
+    }
+
+    if (defaultVal(options.databaseDsn, [])) {
+        config.cfg.databaseDsn = options.databaseDsn;
     }
 
     app.use('/dp', express.static(__dirname + '/lib/static'));
