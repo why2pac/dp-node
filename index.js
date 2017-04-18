@@ -18,7 +18,13 @@ const express = require('express');
 |         logging: Boolean, Logging enabled, Default is false.
 |         static: [String], Static file paths.
 |         redirectNakedToWWW: Boolean, Whether redirect naked domain to www  or not, Default is false.
-|       }
+|         session: {
+|             driver: String, ENUM('redis'), Session Driver, Default is undefined, disabled.
+|             secret: String, Session Secret, Default is dp provided value.
+|             ttl: Integer, Time to alive for each session key-value, Default is 3600*24*30
+|             connection: Object, Options for Driver, Default is empty object({}).
+|         }
+|     }
 |*
 */
 module.exports = (options) => {
@@ -66,6 +72,18 @@ module.exports = (options) => {
 
     if (defaultVal(options.enhanceSecurity, true)) {
         app.use(require('helmet')());
+    }
+
+    if (defaultVal(options.cookieEnabled, true)) {
+        app.use(require('cookie-parser')());
+    }
+
+    if (defaultVal(options.session, {})) {
+        config.cfg.session = options.session;
+        config.cfg.session = config.cfg.session || {};
+
+        config.cfg.session.secret = config.cfg.session.secret || 'dR@9oNp0W@r~NoD2';
+        config.cfg.session.ttl = config.cfg.session.ttl || 3600*24*30;
     }
 
     app.use('/dp', express.static(__dirname + '/lib/static'));
