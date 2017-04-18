@@ -3,7 +3,7 @@
 
 # dp-node
 
-Faster, cheaper, better web framework for Node.js
+Faster, cheaper, better web framework for Node.js, built on top of express.
 
 ## Installation
 
