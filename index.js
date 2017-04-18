@@ -41,8 +41,8 @@ module.exports = (options) => {
     config.cfg.view = options.apppath + '/view';
     config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(options.minifyRemoveLineBreakWhitespace, true);
 
-    config.delegate = {};
-    config.delegate.error = options.error || undefined;
+    config.handler = {};
+    config.handler.error = options.error || undefined;
 
     config.cfg.viewHelpers = options.viewHelpers || {};
 
