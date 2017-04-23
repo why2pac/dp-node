@@ -33,6 +33,7 @@
         "body-parser": "^1.17.1",
         "handlebars": "^4.0.6",
         "handlebars-helpers": "^0.8.2",
+        "handlebars-helper-repeat": "^1.0.0",
         "promised-handlebars": "^2.0.1",
         "fs-promise": "^2.0.2",
         "morgan": "^1.8.1",
