@@ -9,6 +9,8 @@ const express = require('express');
 |* @param {Object} [options] {
 |         app: Object, Express App.
 |         apppath: String, Application Absolute Path [Required]
+|         controllerPath: String, View Path, Default is 'controller'
+|         viewPath: String, View Path, Default is 'view'
 |         port: Int, Binding port, If specified, will bind automatically.
 |         debug: Boolean, Debug Mode, Default is false.
 |         compression: Boolean, Compression, Default is true.
@@ -44,8 +46,8 @@ module.exports = (options) => {
 
     config.cfg = {};
     config.cfg.apppath = options.apppath;
-    config.cfg.controller = options.apppath + '/controller';
-    config.cfg.view = options.apppath + '/view';
+    config.cfg.controller = options.apppath + ('/controller' || options.controllerPath);
+    config.cfg.view = options.apppath + ('/view' || options.viewPath);
     config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(options.minifyRemoveLineBreakWhitespace, true);
 
     config.handler = {};
