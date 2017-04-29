@@ -47,7 +47,7 @@ App
 
 ### Controller
 
-#### App/controller/foo/bar/index.js
+#### App/controller/foo/bar/index.js / http://localhost/foo/bar
 
 ```Javascript
 module.exports = {
@@ -89,7 +89,7 @@ module.exports = {
 };
 ```
 
-#### App/model/foo/bar/index.js
+#### App/model/foo/bar/index.js / model.foo.bar
 
 ```Javascript
 module.exports = {
