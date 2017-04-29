@@ -89,6 +89,8 @@ module.exports = {
 };
 ```
 
+### Model
+
 #### App/model/foo/bar/index.js / model.foo.bar
 
 ```Javascript
@@ -109,7 +111,9 @@ module.exports = {
 };
 ```
 
-#### App/view/foo/foo.html
+### View
+
+#### App/view/foo/foo.html / foo/foo.html
 
 ```HTML
 <p>{{arg1} + {{arg2}} = <strong>{{add}}</strong></p>
