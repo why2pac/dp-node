@@ -118,6 +118,7 @@ module.exports = (options) => {
 
     config.view = require('./lib/view')(config);
     config.router = require('./lib/router')(config);
+    config.helper = require('./lib/helper')(config);
     config.model = require('./lib/model')(config);
 
     return {
