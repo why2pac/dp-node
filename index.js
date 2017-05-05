@@ -108,8 +108,11 @@ module.exports = (options) => {
     }
 
     const listen = (port) => {
-        console.log('Listening .. ' + port);
-        app.listen(port);
+        if (options.logging) {
+            console.log('Listening .. ' + port);
+        }
+        
+        return app.listen(port);
     }
 
     if (options.port) {
