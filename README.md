@@ -1,7 +1,10 @@
 **THIS PROJECT IS UNDER DEVELOPMENT, DO NOT USE IN PRODUCTION.**
 ----------------------------------------------------------------
 
-# dp-node
+dp-node
+=======
+
+[![Dependency Status](https://david-dm.org/why2pac/dp-node.svg)](https://david-dm.org/why2pac/dp-node)
 
 Faster, cheaper, better web framework for Node.js, built on top of express.
 
