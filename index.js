@@ -25,6 +25,7 @@ const express = require('express');
 |             driver: String, ENUM('redis'), Session Driver, Default is undefined, disabled.
 |             secret: String, Session Secret, Default is dp provided value.
 |             ttl: Integer, Time to alive for each session key-value, Default is 3600*24*30
+|             volatility: Boolean, Whether if use session cookie or not, Default is false.
 |             connection: Object, Options for Driver, Default is empty object({}).
 |         }
 |     }
@@ -35,7 +36,7 @@ module.exports = (options) => {
     var config = {};
 
     var defaultVal = (val, defaultVal) => {
-        if (val == undefined) {
+        if (val === undefined) {
             return defaultVal;
         }
 
@@ -86,6 +87,7 @@ module.exports = (options) => {
         config.cfg.session = config.cfg.session || {};
 
         config.cfg.session.secret = config.cfg.session.secret || 'dR@9oNp0W@r~NoD2';
+        config.cfg.session.volatility = defaultVal(config.cfg.session.volatility, false);
         config.cfg.session.ttl = config.cfg.session.ttl || 3600*24*30;
     }
 
@@ -111,7 +113,7 @@ module.exports = (options) => {
         if (options.logging) {
             console.log('Listening .. ' + port);
         }
-        
+
         return app.listen(port);
     }
 
