@@ -17,7 +17,8 @@ $ npm install dp-node
 ## Features
 
   * Focus on faster development.
-  
+  * Async/Await ready.
+
 ## Quick Start
 
 ### Directory Structure
@@ -76,17 +77,17 @@ module.exports = {
          *     finishWithCode: (code, body)
          *  }
          */
-         
+
         var arg1 = 10;
         var arg2 = 20;
         var add = controller.model.foo.bar.add(arg1, arg2);  // == 30
-        
+
         var params = {
             arg1: arg1,
             arg2: arg2,
             add: add
         };
-        
+
         controller.render('foo/foo.html', params);
     }
 };
@@ -108,7 +109,7 @@ module.exports = {
          *     tran: (blocks, dsn)
          *  }
          */
-         
+
         return arg1 + arg2;
     }
 };
