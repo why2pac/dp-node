@@ -41,6 +41,6 @@
         "compression": "^1.6.2",
         "helmet": "^3.5.0",
         "parse-domain": "^1.1.0",
-        "knex": "^0.12.9"
+        "knex": "^0.13.0"
     }
 }
