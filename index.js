@@ -72,7 +72,7 @@ module.exports = (options) => {
     }
 
     if (defaultVal(options.redirectNakedToWWW, false)) {
-        app.use(require('./lib/middleware/express-naked-redirect')());
+        app.use(require('express-naked-redirect')());
     }
 
     if (defaultVal(options.compression, true)) {
