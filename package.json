@@ -35,7 +35,7 @@
         "handlebars-helpers": "^0.9.6",
         "handlebars-helper-repeat": "^1.0.0",
         "promised-handlebars": "^2.0.1",
-        "fs-promise": "^2.0.2",
+        "fs-extra": "^4.0.1",
         "morgan": "^1.8.2",
         "html-minifier": "^3.5.3",
         "compression": "^1.7.0",
