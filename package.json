@@ -42,6 +42,8 @@
         "helmet": "^3.8.1",
         "parse-domain": "^1.1.0",
         "knex": "^0.13.0",
-        "express-naked-redirect": "^0.1.0"
+        "express-naked-redirect": "^0.1.0",
+        "camelcase": "^4.1.0",
+        "decamelize": "^1.2.0"
     }
 }
