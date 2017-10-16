@@ -55,7 +55,7 @@ App
 
 ```Javascript
 module.exports = {
-    get: (controller) => {  // `controller` argument is required.
+    get: (controller) => {  // `controller` parameter is required.
         /*
          *  `controller` exports: {
          *     raw: {
@@ -99,7 +99,7 @@ module.exports = {
 
 ```Javascript
 module.exports = {
-    add: (db, arg1, arg2) => {  // `db` argument is required.
+    add: (db, arg1, arg2) => {  // `db` parameter is required.
         /*
          *  `db` exports: {
          *     knex: (dsn)
