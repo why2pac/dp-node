@@ -1,49 +1,49 @@
 {
-    "name": "dp-node",
-    "version": "0.0.13",
-    "description": "Faster, cheaper, better web framework for Node.js",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/why2pac/dp-node.git"
-    },
-    "keywords": [
-        "MVC",
-        "Web",
-        "Framework",
-        "Express"
-    ],
-    "author": "GONZO",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/why2pac/dp-node/issues"
-    },
-    "homepage": "https://github.com/why2pac/dp-node#readme",
-    "dependencies": {
-        "bluebird": "^3.5.1",
-        "asyncawait": "^1.0.6",
-        "express": "^4.16.2",
-        "cookie": "0.3.1",
-        "cookie-parser": "^1.4.3",
-        "cookie-signature": "^1.0.6",
-        "uid-safe": "^2.1.5",
-        "body-parser": "^1.18.2",
-        "handlebars": "^4.0.11",
-        "handlebars-helpers": "^0.9.8",
-        "handlebars-helper-repeat": "^1.0.0",
-        "promised-handlebars": "^2.0.1",
-        "fs-extra": "^4.0.2",
-        "morgan": "^1.9.0",
-        "html-minifier": "^3.5.6",
-        "compression": "^1.7.1",
-        "helmet": "^3.9.0",
-        "parse-domain": "^1.1.0",
-        "knex": "^0.14.0",
-        "express-naked-redirect": "^0.1.0",
-        "camelcase": "^4.1.0",
-        "decamelize": "^1.2.0"
-    }
+  "name": "dp-node",
+  "version": "0.0.13",
+  "description": "Faster, cheaper, better web framework for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/why2pac/dp-node.git"
+  },
+  "keywords": [
+    "MVC",
+    "Web",
+    "Framework",
+    "Express"
+  ],
+  "author": "GONZO",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/why2pac/dp-node/issues"
+  },
+  "homepage": "https://github.com/why2pac/dp-node#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "asyncawait": "^1.0.6",
+    "express": "^4.16.2",
+    "cookie": "0.3.1",
+    "cookie-parser": "^1.4.3",
+    "cookie-signature": "^1.0.6",
+    "uid-safe": "^2.1.5",
+    "body-parser": "^1.18.2",
+    "handlebars": "^4.0.11",
+    "handlebars-helpers": "^0.9.8",
+    "handlebars-helper-repeat": "^1.0.0",
+    "promised-handlebars": "^2.0.1",
+    "fs-extra": "^4.0.2",
+    "morgan": "^1.9.0",
+    "html-minifier": "^3.5.6",
+    "compression": "^1.7.1",
+    "helmet": "^3.9.0",
+    "parse-domain": "^1.1.0",
+    "knex": "^0.14.0",
+    "express-naked-redirect": "^0.1.0",
+    "camelcase": "^4.1.0",
+    "decamelize": "^1.2.0"
+  }
 }
