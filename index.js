@@ -18,6 +18,7 @@ const express = require('express');
 |         minifyRemoveLineBreakWhitespace: Boolean, Whether if remove line break whitespace or not, Default is true.
 |         requestSizeLimit: Numeric, Limit size of the request.
 |         error: Function, Error Handler.
+|         errorLogging: Boolean, Error Logging enabled, Default is true.
 |         logging: Boolean, Logging enabled, Default is false.
 |         static: [String], Static file paths.
 |         redirectNakedToWWW: Boolean, Whether redirect naked domain to www  or not, Default is false.
@@ -57,6 +58,7 @@ module.exports = (options) => {
     config.cfg.view = options.apppath + ('/view' || options.viewPath);
     config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(options.minifyRemoveLineBreakWhitespace, true);
     config.cfg.requestSizeLimit = options.requestSizeLimit || '0.5mb';
+    config.cfg.errorLogging = defaultVal(options.errorLogging, true);
 
     config.handler = {};
     config.handler.error = options.error || undefined;
