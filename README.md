@@ -4,7 +4,11 @@
 dp-node
 =======
 
+[![NPM Version](https://img.shields.io/npm/v/dp-node.svg)](https://npmjs.org/package/dp-node)
+[![NPM Downloads](https://img.shields.io/npm/dm/dp-node.svg)](https://npmjs.org/package/dp-node)
 [![Dependency Status](https://david-dm.org/why2pac/dp-node.svg)](https://david-dm.org/why2pac/dp-node)
+[![Linux Build](https://img.shields.io/travis/why2pac/dp-node/master.svg?label=linux)](https://travis-ci.org/why2pac/dp-node)
+[![Windows Build](https://img.shields.io/appveyor/ci/why2pac/dp-node/master.svg?label=windows)](https://ci.appveyor.com/project/why2pac/dp-node)
 
 Faster, cheaper, better web framework for Node.js, built on top of express.
 
