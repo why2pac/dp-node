@@ -1,4 +1,4 @@
-require('./tester')((req) => {
+require('../index').Tester.init()((req) => {
   it('GET /', (done) => {
     req().get('/').expect(200, done);
   });
@@ -56,4 +56,4 @@ require('./tester')((req) => {
       req().get('/view/simple_render').expect(200, 'rendered', done);
     });
   });
-});
+}, require('./example/app.js'));

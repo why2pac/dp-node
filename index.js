@@ -145,3 +145,5 @@ module.exports = (options) => {
         listen: listen
     }
 }
+
+module.exports.Tester = require('./lib/tester');
