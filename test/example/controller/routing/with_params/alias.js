@@ -1,20 +1,20 @@
 module.exports = {
-  getSuffix: '/:id(\\d+)?',
+  get_: '/:id(\\d+)?',
   get: (controller) => {
     var id = controller.params('id', true);
     controller.finish(String(id || 'EMPTY'));
   },
-  postSuffix: '/:id(\\d+)?',
+  post_: '/:id(\\d+)?',
   post: (controller) => {
     var id = controller.params('id', true);
     controller.finish(String(id || 'EMPTY'));
   },
-  deleteSuffix: '/:id(\\d+)?',
+  delete_: '/:id(\\d+)?',
   delete: (controller) => {
     var id = controller.params('id', true);
     controller.finish(String(id || 'EMPTY'));
   },
-  putSuffix: '/:id(\\d+)?',
+  put_: '/:id(\\d+)?',
   put: (controller) => {
     var id = controller.params('id', true);
     controller.finish(String(id || 'EMPTY'));
