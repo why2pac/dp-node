@@ -37,13 +37,13 @@
     "promised-handlebars": "^2.0.1",
     "fs-extra": "^5.0.0",
     "morgan": "^1.9.0",
-    "html-minifier": "^3.5.6",
+    "html-minifier": "^3.5.8",
     "compression": "^1.7.1",
     "helmet": "^3.9.0",
-    "knex": "^0.14.0",
-    "express-naked-redirect": "^0.1.0",
+    "knex": "^0.14.2",
+    "express-naked-redirect": "^0.1.1",
     "camelcase": "^4.1.0",
-    "decamelize": "^1.2.0"
+    "decamelize": "^2.0.0"
   },
   "devDependencies": {
     "npm-check": "^5.5.2",
