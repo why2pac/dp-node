@@ -6,21 +6,20 @@ environment:
     - nodejs_version: "9"
 services:
   - mysql
-init:
-  - npm -v
-  - node -v
-  - npm cache clean
-  - SET PATH=%MYSQL_PATH%\bin;%PATH%
 cache:
   - node_modules
 install:
   - ps: Install-Product node $env:nodejs_version
   - if exist node_modules npm prune
   - if exist node_modules npm rebuild
+  - npm -v
+  - node -v
+  - npm cache clean
+  - SET PATH=C:\Program Files\MySql\MySQL Server 5.7\bin\;%PATH%
   - npm install
 build: off
 before_test:
-  - mysql -e "CREATE DATABASE IF NOT EXISTS dp_node;" --user=root
+  - mysql -uroot -pPassword12! -e "CREATE DATABASE IF NOT EXISTS dp_node;"
 test_script:
   - node --version
   - npm --version
