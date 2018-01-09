@@ -1,5 +1,15 @@
 'use strict';
 
+global.stage = 'local';
+
+if (process.env.APPVEYOR) {
+    global.stage = 'testAppveyor';
+}
+else if (process.env.TRAVIS) {
+    global.stage = 'testTravis';
+}
+
+var databaseDsn = require('./config/db');
 var options = {
     apppath: __dirname,
     port: process.env.PORT || (global.isTest ? null : 7777),
@@ -16,7 +26,8 @@ var options = {
     cookie: {
       secret: 'cookie-secret-modify-this-value-in-production'
     },
-    databaseDsn: null
+    databaseDsn: Object.keys(databaseDsn).filter((e) => {
+        return e.startsWith(stage); }).map((e) => { return databaseDsn[e] })
 };
 
 var dp = require('../../index')(options);

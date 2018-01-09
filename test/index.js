@@ -63,6 +63,12 @@ require('../index').Tester.init()((req) => {
       });
     });
   });
+  
+  describe('/model', () => {
+    it('GET /model', (done) => {
+      req().get('/model').expect(200, 'done', done);
+    });
+  });
 
   describe('/routing', () => {
     it('GET /', (done) => {

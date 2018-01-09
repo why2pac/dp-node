@@ -14,6 +14,8 @@ install:
   - if exist node_modules npm rebuild
   - npm install
 build: off
+before_test:
+  - mysql -e "CREATE DATABASE IF NOT EXISTS dp_node;" --user=root
 test_script:
   - node --version
   - npm --version

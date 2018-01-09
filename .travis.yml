@@ -11,6 +11,8 @@ cache:
   directories:
     - node_modules
 before_install:
+  # Initialization, Database
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS dp_node;'
   # Update Node.js modules
   - "test ! -d node_modules || npm prune"
   - "test ! -d node_modules || npm rebuild"
