@@ -4,10 +4,8 @@ module.exports = {
       var token = req.get('DP-NODE-TOKEN');
 
       res.async((dp) => {
-        if (!token) {
-          if (!dp.model.middleware.token.validate(token)) {
-            return res.status(400).send('INVALID-TOKEN');
-          }
+        if (!dp.model.middleware.token.validate(token)) {
+          return res.status(400).send('INVALID-TOKEN');
         }
 
         next();
@@ -17,10 +15,8 @@ module.exports = {
       var token2 = req.get('DP-NODE-TOKEN2');
 
       res.async((dp) => {
-        if (!token2) {
-          if (!dp.model.middleware.token.validate(token2)) {
-            return res.status(400).send('INVALID-TOKEN');
-          }
+        if (!dp.model.middleware.token.validate(token2)) {
+          return res.status(400).send('INVALID-TOKEN');
         }
 
         next();
