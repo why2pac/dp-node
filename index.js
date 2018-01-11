@@ -140,10 +140,17 @@ module.exports = (options) => {
     config.helper = require('./lib/helper')(config);
     config.model = require('./lib/model')(config);
 
-    return {
+    var dp = {
         app: app,
         listen: listen
+    };
+
+    // Assign config when test mode enabled.
+    if (global.isTest) {
+      dp.config = config;
     }
+
+    return dp;
 }
 
 module.exports.Tester = require('./lib/tester');
