@@ -26,6 +26,32 @@ require('../index').Tester.init()((req) => {
       req().get('/middleware').set('DP-NODE-TOKEN', '1234567890').expect(200, 'DONE', done);
     });
 
+    describe('/file', () => {
+      it('GET /file/child/grandchild', (done) => {
+        req().get('/middleware/file/child/grandchild').expect(200, 'file/child/grandchild/middleware', done);
+      });
+
+      it('GET /middleware/file/child/grandchild2', (done) => {
+        req().get('/middleware/file/child/grandchild2').expect(200, 'file/middleware', done);
+      });
+
+      it('GET /middleware/file/child', (done) => {
+        req().get('/middleware/file/child').expect(200, 'file/middleware', done);
+      });
+
+      it('GET /middleware/file/child3', (done) => {
+        req().get('/middleware/file/child3').expect(200, 'file/child3/middleware', done);
+      });
+
+      it('GET /middleware/file/child2', (done) => {
+        req().get('/middleware/file/child2').expect(200, 'file/middleware', done);
+      });
+
+      it('GET /middleware/file', (done) => {
+        req().get('/middleware/file').expect(200, 'file/middleware', done);
+      });
+    });
+
     describe('/for-all', () => {
       it('GET / - with invalid token', (done) => {
         req().get('/middleware/for-all').expect(400, 'INVALID-TOKEN', done);
@@ -63,7 +89,7 @@ require('../index').Tester.init()((req) => {
       });
     });
   });
-  
+
   describe('/model', () => {
     it('GET /model', (done) => {
       req().get('/model').expect(200, 'done', done);
@@ -153,45 +179,45 @@ require('../index').Tester.init()((req) => {
           req().put('/it-is-a-replaced-path-for-all-methods-alias').expect(200, '/it-is-a-replaced-path-for-all-methods-alias', done);
         });
       });
-      
+
       describe('/with_params', () => {
         it('GET /replaced-path-with-suffix/22', (done) => {
           req().get('/replaced-path-with-suffix/22').expect(200, '22', done);
         });
-    
+
         it('GET /replaced-path-with-suffix/23', (done) => {
           req().get('/replaced-path-with-suffix/23').expect(200, '23', done);
         });
-    
+
         it('POST /replaced-path-with-suffix/22', (done) => {
           req().post('/replaced-path-with-suffix/22').expect(200, '22', done);
         });
-    
+
         it('PUT /replaced-path-with-suffix/22', (done) => {
           req().put('/replaced-path-with-suffix/22').expect(200, '22', done);
         });
-    
+
         it('DELETE /replaced-path-with-suffix/22', (done) => {
           req().delete('/replaced-path-with-suffix/22').expect(200, '22', done);
         });
-    
+
         describe('/alias', () => {
           it('GET /replaced-alias-path-with-suffix', (done) => {
             req().get('/replaced-alias-path-with-suffix').expect(200, 'EMPTY', done);
           });
-    
+
           it('GET /replaced-alias-path-with-suffix/22', (done) => {
             req().get('/replaced-alias-path-with-suffix/22').expect(200, '22', done);
           });
-    
+
           it('POST /replaced-alias-path-with-suffix/22', (done) => {
             req().post('/replaced-alias-path-with-suffix/22').expect(200, '22', done);
           });
-    
+
           it('PUT /replaced-alias-path-with-suffix/22', (done) => {
             req().put('/replaced-alias-path-with-suffix/22').expect(200, '22', done);
           });
-    
+
           it('DELETE /replaced-alias-path-with-suffix/22', (done) => {
             req().delete('/replaced-alias-path-with-suffix/22').expect(200, '22', done);
           });
