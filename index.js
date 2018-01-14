@@ -23,6 +23,7 @@ const express = require('express');
 |         static: [String], Static file paths.
 |         redirectNakedToWWW: Boolean, Whether redirect naked domain to www  or not, Default is false.
 |         databaseDsn: [Object], Pre-defined database dsn key as `key`, Default is empty.
+|         mode: String, Supported values are `web` or `job`, Default is `web`.
 |         session: {
 |             driver: String, ENUM('redis'), Session Driver, Default is undefined, disabled.
 |             secret: String, Session Secret, Default is dp provided value.
@@ -50,6 +51,7 @@ module.exports = (options) => {
         return val;
     }
 
+    config.mode = (options.mode || 'web').toLowerCase();
     config.debug = defaultVal(options.debug, false);
 
     config.cfg = {};
@@ -131,7 +133,7 @@ module.exports = (options) => {
         return app.listen(port);
     }
 
-    if (options.port) {
+    if (options.port && config.mode !== 'job') {
         listen(options.port);
     }
 
@@ -148,6 +150,11 @@ module.exports = (options) => {
     // Assign config when test mode enabled.
     if (global.isTest) {
       dp.config = config;
+    }
+
+    // for Job mode.
+    if (config.mode === 'job') {
+      return require('./lib/job')(config);
     }
 
     return dp;

@@ -281,4 +281,17 @@ require('../index').Tester.init()((req) => {
       req().get('/view/simple_render').expect(200, 'rendered', done);
     });
   });
+
+  describe('job', () => {
+    const CliTest = require('command-line-test');
+    const Assert = require('assert');
+
+    it('simple job', (done) => {
+      const jobTest = new CliTest();
+      jobTest.exec('node test/example/job/test.js').then(res => {
+        Assert(String(res.stdout) === 'done');
+        done();
+      });
+    });
+  });
 }, require('./example/app.js'));

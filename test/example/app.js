@@ -12,6 +12,7 @@ else if (process.env.TRAVIS) {
 var databaseDsn = require('./config/db');
 var options = {
     apppath: __dirname,
+    mode: global.mode || null,
     port: process.env.PORT || (global.isTest ? null : 7777),
     static: 'static',
     debug: global.optionDebug || true,
