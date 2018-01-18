@@ -293,5 +293,13 @@ require('../index').Tester.init()((req) => {
         done();
       });
     });
+
+    it('intended job exception', (done) => {
+      const jobTest = new CliTest();
+      jobTest.exec('node test/example/job/test_error.js').then((res) => {
+        Assert(String(res.stderr).indexOf('job exception') !== -1);
+        done();
+      });
+    });
   });
 }, require('./example/app.js'));
