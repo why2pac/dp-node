@@ -4,6 +4,12 @@ require('../index').Tester.init()((req) => {
   });
 
   describe('Controller', () => {
+    describe('Middleware', () => {
+      it('Response should be `IGNORED` when returned `false` from controller method.', (done) => {
+        req().get('/middleware/file/end/ignore').expect(200, 'IGNORED', done);
+      });
+    });
+
     describe('Error Handling', () => {
       describe('Finisher', () => {
         it('Response should be `NOTFOUND` with 404 status code.', (done) => {
@@ -54,7 +60,7 @@ require('../index').Tester.init()((req) => {
 
     it('Response should be `job exception` for intended exception.', function (done) {
       this.timeout(5000);
-      
+
       const jobTest = new CliTest();
       jobTest.exec('node test/example/job/test_error.js').then((res) => {
         Assert(String(res.stderr).indexOf('job exception') !== -1);
