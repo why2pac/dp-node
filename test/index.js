@@ -32,6 +32,12 @@ require('../index').Tester.init()((req) => {
     });
   });
 
+  describe('View', () => {
+    it('Simple view rendering test.', (done) => {
+      req().get('/view/simple_render').expect(200, 'rendered', done);
+    });
+  });
+
   describe('/middleware', () => {
     it('GET / - with invalid token', (done) => {
       req().get('/middleware').expect(400, 'INVALID-TOKEN', done);
@@ -300,12 +306,6 @@ require('../index').Tester.init()((req) => {
       it('DELETE /with_params/alias/22', (done) => {
         req().delete('/routing/with_params/alias/22').expect(200, '22', done);
       });
-    });
-  });
-
-  describe('/view', () => {
-    it('GET /simple_render', (done) => {
-      req().get('/view/simple_render').expect(200, 'rendered', done);
     });
   });
 
