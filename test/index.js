@@ -23,6 +23,15 @@ require('../index').Tester.init()((req) => {
     });
   });
 
+  describe('Model', () => {
+    describe('MySQL', () => {
+      it('Simple query test.', function (done) {
+        this.timeout(5000);
+        req().get('/model/mysql/simple').expect(200, 'done', done);
+      });
+    });
+  });
+
   describe('/middleware', () => {
     it('GET / - with invalid token', (done) => {
       req().get('/middleware').expect(400, 'INVALID-TOKEN', done);
@@ -111,12 +120,6 @@ require('../index').Tester.init()((req) => {
         .set('DP-NODE-TOKEN2', '1234567890')
         .expect(200, 'DONE', done);
       });
-    });
-  });
-
-  describe('/model', () => {
-    it('GET /model', (done) => {
-      req().get('/model').expect(200, 'done', done);
     });
   });
 
