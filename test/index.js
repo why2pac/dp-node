@@ -1,19 +1,25 @@
 require('../index').Tester.init()((req) => {
-  it('GET /', (done) => {
+  it('Index', (done) => {
     req().get('/').expect(200, done);
   });
 
-  describe('/error', () => {
-    it('GET /404', (done) => {
-      req().get('/error/404').expect(404, 'NOTFOUND', done);
+  describe('Controller', () => {
+    describe('Error Handling', () => {
+      describe('Finisher', () => {
+        it('Response should be `NOTFOUND` with 404 status code.', (done) => {
+          req().get('/error/404').expect(404, 'NOTFOUND', done);
+        });
+
+        it('Response should be `ERROR` with 500 status code.', (done) => {
+          req().get('/error/500_code').expect(500, 'ERROR', done);
+        });
+      });
     });
 
-    it('GET /500_code', (done) => {
-      req().get('/error/500_code').expect(500, 'ERROR', done);
-    });
-
-    it('GET /500_handler', (done) => {
-      req().get('/error/500_handler').expect(500, '[500] An error has occurred.', done);
+    describe('Exception Handler', () => {
+      it('Response should be designated code and body on `error.js`.', (done) => {
+        req().get('/error/500_handler').expect(500, '[500] An error has occurred.', done);
+      });
     });
   });
 
