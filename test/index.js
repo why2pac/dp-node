@@ -56,6 +56,14 @@ require('../index').Tester.init()((req) => {
           req().get('/middleware/file/end').expect(200, 'middleware-for-end-and-returned-value', done);
         });
       });
+
+      it('GET /middleware/file/error', (done) => {
+        req().get('/middleware/file/error').expect(500, '/middleware/file/error/middleware', done);
+      });
+
+      it('GET /middleware/file/error2', (done) => {
+        req().get('/middleware/file/error2').expect(500, '/middleware/file/error2/middleware', done);
+      });
     });
 
     describe('/for-all', () => {
