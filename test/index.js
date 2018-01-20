@@ -66,6 +66,10 @@ require('../index').Tester.init()((req) => {
       });
     });
 
+    it('GET /middleware/file/not_async', (done) => {
+      req().get('/middleware/file/not_async').expect(200, 'begin-ok-controller', done);
+    });
+
     describe('/for-all', () => {
       it('GET / - with invalid token', (done) => {
         req().get('/middleware/for-all').expect(400, 'INVALID-TOKEN', done);
