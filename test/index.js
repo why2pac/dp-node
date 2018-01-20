@@ -38,6 +38,31 @@ require('../index').Tester.init()((req) => {
     });
   });
 
+  describe('Job', () => {
+    const CliTest = require('command-line-test');
+    const Assert = require('assert');
+
+    it('Response should be `done` for simple job test.', function (done) {
+      this.timeout(5000);
+
+      const jobTest = new CliTest();
+      jobTest.exec('node test/example/job/test.js').then(res => {
+        Assert(String(res.stdout) === 'done');
+        done();
+      });
+    });
+
+    it('Response should be `job exception` for intended exception.', function (done) {
+      this.timeout(5000);
+      
+      const jobTest = new CliTest();
+      jobTest.exec('node test/example/job/test_error.js').then((res) => {
+        Assert(String(res.stderr).indexOf('job exception') !== -1);
+        done();
+      });
+    });
+  });
+
   describe('/middleware', () => {
     it('GET / - with invalid token', (done) => {
       req().get('/middleware').expect(400, 'INVALID-TOKEN', done);
@@ -305,27 +330,6 @@ require('../index').Tester.init()((req) => {
 
       it('DELETE /with_params/alias/22', (done) => {
         req().delete('/routing/with_params/alias/22').expect(200, '22', done);
-      });
-    });
-  });
-
-  describe('job', () => {
-    const CliTest = require('command-line-test');
-    const Assert = require('assert');
-
-    it('simple job', (done) => {
-      const jobTest = new CliTest();
-      jobTest.exec('node test/example/job/test.js').then(res => {
-        Assert(String(res.stdout) === 'done');
-        done();
-      });
-    });
-
-    it('intended job exception', (done) => {
-      const jobTest = new CliTest();
-      jobTest.exec('node test/example/job/test_error.js').then((res) => {
-        Assert(String(res.stderr).indexOf('job exception') !== -1);
-        done();
       });
     });
   });
