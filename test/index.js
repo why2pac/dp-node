@@ -4,7 +4,7 @@ require('../index').Tester.init()((req) => {
   });
 
   describe('Controller', () => {
-    describe('Exception Handler', () => {
+    describe('Redirect', () => {
       it('Response should be `Found` when 302 status code redirected specified location.', (done) => {
         req().get('/controller/finisher/redirect').expect(302, 'Found. Redirecting to /', done);
       });
