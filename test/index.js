@@ -68,6 +68,10 @@ require('../index').Tester.init()((req) => {
           req().get('/this_is_a_not_exists_page?redirect=yes').expect(302, 'Found. Redirecting to /', done);
         });
 
+        it('Response should be `404, RENDERED BY VIEW`.', (done) => {
+          req().get('/this_is_a_not_exists_page?view=yes').expect(200, '404, RENDERED BY VIEW', done);
+        });
+
         it('Response should be `ERROR` with 500 status code.', (done) => {
           req().get('/error/500_code').expect(500, 'ERROR', done);
         });

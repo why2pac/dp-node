@@ -9,7 +9,10 @@ module.exports = (controller, error, statusCode) => {
   }
 
   if (statusCode === 404) {
-    if (controller.params('redirect') === 'yes') {
+    if (controller.params('view') === 'yes') {
+      return controller.render('system/404.html');
+    }
+    else if (controller.params('redirect') === 'yes') {
       return controller.redirect('/');
     }
 
