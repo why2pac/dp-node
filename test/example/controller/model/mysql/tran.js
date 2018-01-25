@@ -2,13 +2,15 @@ const assert = require('assert');
 
 module.exports = {
   get: (controller) => {
-    controller.model.test.tran.dropTable();
+    var tableSuffix = String(Math.random()).slice(2);
 
-    var fail = controller.model.test.tran.fail();
+    controller.model.test.tran.dropTable(tableSuffix);
+
+    var fail = controller.model.test.tran.fail(tableSuffix);
 
     assert(!fail);
 
-    var res = controller.model.test.tran.succ();
+    var res = controller.model.test.tran.succ(tableSuffix);
 
     assert(res[0].warningCount);
     assert(res[1].insertId === 1);
