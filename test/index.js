@@ -4,17 +4,19 @@ require('../index').Tester.init()((req) => {
   });
 
   describe('Controller', () => {
-    describe('Redirect', () => {
-      it('Response should be `Found` when 302 status code redirected specified location.', (done) => {
-        req().get('/controller/finisher/redirect').expect(302, 'Found. Redirecting to /', done);
-      });
+    describe('Finisher', () => {
+      describe('Redirect', () => {
+        it('Response should be `Found` when 302 status code redirected specified location.', (done) => {
+          req().get('/controller/finisher/redirect').expect(302, 'Found. Redirecting to /', done);
+        });
 
-      it('Response should be `Moved` with 301 status code when redirected specified location.', (done) => {
-        req().get('/controller/finisher/redirect/with_code').expect(301, 'Moved Permanently. Redirecting to /', done);
-      });
+        it('Response should be `Moved` with 301 status code when redirected specified location.', (done) => {
+          req().get('/controller/finisher/redirect/with_code').expect(301, 'Moved Permanently. Redirecting to /', done);
+        });
 
-      it('Response should be `Moved` with 301 status code when redirected specified location.', (done) => {
-        req().get('/controller/finisher/redirect/with_code2').expect(301, 'Moved Permanently. Redirecting to /', done);
+        it('Response should be `Moved` with 301 status code when redirected specified location.', (done) => {
+          req().get('/controller/finisher/redirect/with_code2').expect(301, 'Moved Permanently. Redirecting to /', done);
+        });
       });
     });
 
