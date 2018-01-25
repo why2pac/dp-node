@@ -9,8 +9,10 @@ module.exports = (controller, error, statusCode) => {
     return controller.finisher.notfound('404 NOTFOUND');
   }
 
-  if (error && error.name === 'CustomError' && error.message) {
-    return controller.finisher.error(error.message);
+  if (error && error.originalError &&
+      error.originalError.name === 'CustomError' &&
+      error.originalError.message) {
+    return controller.finisher.error(error.originalError.message);
   }
 
   controller.finisher.error('[' + statusCode + '] An error has occurred.');
