@@ -1,6 +1,9 @@
 module.exports = (controller, error, statusCode) => {
+  // for async-await test
+  controller.model.test.inquiryRecord();
+
   // from Job exception.
-  if (!controller) {
+  if (error.name === 'DPJobError') {
     console.error('job exception');
     return;
   }

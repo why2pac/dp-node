@@ -62,8 +62,18 @@ module.exports = (options) => {
     config.cfg.requestSizeLimit = options.requestSizeLimit || '0.5mb';
     config.cfg.errorLogging = defaultVal(options.errorLogging, true);
 
+    var errorHandler = options.error || undefined;
+
     config.handler = {};
-    config.handler.error = options.error || undefined;
+    config.handler.error = errorHandler;
+
+    if (typeof config.handler.error === 'function') {
+      config.handler.error = (controller, error, statusCode) => {
+        return async (() => {
+          return await (errorHandler(controller, error, statusCode));
+        })();
+      }
+    }
 
     config.cfg.viewHelpers = options.viewHelpers || {};
 
