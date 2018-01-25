@@ -5,6 +5,28 @@ require('../index').Tester.init()((req) => {
 
   describe('Controller', () => {
     describe('Finisher', () => {
+      describe('Codes', () => {
+        it('Response should be `NOTFOUND` with 404 status code.', (done) => {
+          req().get('/controller/finisher/by_code/notfound').expect(404, 'NOTFOUND', done);
+        });
+
+        it('Response should be `INVALID` with 400 status code.', (done) => {
+          req().get('/controller/finisher/by_code/invalid').expect(400, 'INVALID', done);
+        });
+
+        it('Response should be `UNAUTHORIZED` with 401 status code.', (done) => {
+          req().get('/controller/finisher/by_code/unauthorized').expect(401, 'UNAUTHORIZED', done);
+        });
+
+        it('Response should be `DENIED` with 403 status code.', (done) => {
+          req().get('/controller/finisher/by_code/denied').expect(403, 'DENIED', done);
+        });
+
+        it('Response should be `ERROR` with 500 status code.', (done) => {
+          req().get('/controller/finisher/by_code/error').expect(500, 'ERROR', done);
+        });
+      });
+
       describe('Redirect', () => {
         it('Response should be `Found` when 302 status code redirected specified location.', (done) => {
           req().get('/controller/finisher/redirect').expect(302, 'Found. Redirecting to /', done);
