@@ -64,6 +64,10 @@ require('../index').Tester.init()((req) => {
           req().get('/error/404').expect(404, 'NOTFOUND', done);
         });
 
+        it('Response should be `FOUND` with 302 status code.', (done) => {
+          req().get('/this_is_a_not_exists_page?redirect=yes').expect(302, 'Found. Redirecting to /', done);
+        });
+
         it('Response should be `ERROR` with 500 status code.', (done) => {
           req().get('/error/500_code').expect(500, 'ERROR', done);
         });

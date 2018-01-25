@@ -6,6 +6,10 @@ module.exports = (controller, error, statusCode) => {
   }
 
   if (statusCode === 404) {
+    if (controller.params('redirect') === 'yes') {
+      return controller.redirect('/');
+    }
+
     return controller.finisher.notfound('404 NOTFOUND');
   }
 
