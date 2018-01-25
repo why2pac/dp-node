@@ -70,7 +70,18 @@ module.exports = (options) => {
   if (typeof config.handler.error === 'function') {
     config.handler.error = (controller, error, statusCode) => {
       return async (() => {
-        return await (errorHandler(controller, error, statusCode));
+        try {
+          return await (errorHandler(controller, error, statusCode));
+        }
+        catch (e) {
+          console.error(e);
+
+          if (controller && controller.finisher) {
+            controller.finisher.error('An error has occurred.');
+          }
+
+          return false;
+        }
       })();
     }
   }
