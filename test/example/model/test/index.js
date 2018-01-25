@@ -22,5 +22,8 @@ module.exports = {
       WHERE
         id = 1
     `, stage);
+  },
+  dummy: (db) => {
+    return db.row(`SELECT 1`, stage);
   }
 };

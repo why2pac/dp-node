@@ -1,6 +1,10 @@
+const assert = require('assert');
+
 module.exports = (controller, error, statusCode) => {
   // for async-await test
-  controller.model.test.inquiryRecord();
+  var res = controller.model.test.dummy();
+
+  assert(res && res['1'] === 1);
 
   // from Job exception.
   if (error.name === 'DPJobError') {
