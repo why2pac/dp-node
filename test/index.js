@@ -87,6 +87,11 @@ require('../index').Tester.init()((req) => {
         this.timeout(5000);
         req().get('/model/mysql/simple').expect(200, 'done', done);
       });
+
+      it('Simple transaction test.', function (done) {
+        this.timeout(5000);
+        req().get('/model/mysql/tran').expect(200, 'done', done);
+      });
     });
   });
 
