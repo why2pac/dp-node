@@ -58,6 +58,59 @@ require('../index').Tester.init()((req) => {
       });
     });
 
+    describe('Config', () => {
+      describe('Path.Prefix', () => {
+        describe('Relatively', () => {
+          it('Response should be `URL` when configured relative prefix path.', (done) => {
+            var url = '/controller/config/this/prefix/will/be/added/to/all/child/paths';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured relative prefix path for sub path.', (done) => {
+            var url = '/controller/config/this/prefix/will/be/added/to/all/child/paths/child';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured relative prefix path for child directory.', (done) => {
+            var url = '/controller/config/this/prefix/will/be/added/to/all/child/paths/sub/child';
+            req().get(url).expect(200, url, done);
+          });
+        });
+
+        describe('Absolutely', () => {
+          it('Response should be `URL` when configured absolute prefix path.', (done) => {
+            var url = '/this/prefix/will/be/added/to/all/child/paths/as/root';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured absolute prefix path for sub path.', (done) => {
+            var url = '/this/prefix/will/be/added/to/all/child/paths/as/root/sub';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured absolute prefix path for child directory.', (done) => {
+            var url = '/this/prefix/will/be/added/to/all/child/paths/as/root/sub/child';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured absolute prefix path with controller prefix.', (done) => {
+            var url = '/globally_replaced_to_root/param_val';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured absolute prefix path with controller prefix for sub path.', (done) => {
+            var url = '/globally_replaced_to_root/with_prefix/param_val';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be `URL` when configured absolute prefix path with controller prefix for all methods.', (done) => {
+            var url = '/globally_replaced_to_root_all/param_val';
+            req().get(url).expect(200, url, done);
+          });
+        });
+      });
+    });
+
     describe('Error Handling', () => {
       describe('Finisher', () => {
         it('Response should be `NOTFOUND` with 404 status code.', (done) => {
