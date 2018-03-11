@@ -107,6 +107,16 @@ require('../index').Tester.init()((req) => {
             var url = '/globally_replaced_to_root_all/param_val';
             req().get(url).expect(200, url, done);
           });
+
+          it('Response should be `URL` when configured absolute prefix path with conditioned controller prefix for all methods.', (done) => {
+            var url = '/globally_replaced_to_root_all/cond/1';
+            req().get(url).expect(200, url, done);
+          });
+
+          it('Response should be 404 when configured absolute prefix path with conditioned controller prefix for all methods.', (done) => {
+            var url = '/globally_replaced_to_root_all/cond/a';
+            req().get(url).expect(404, done);
+          });
         });
       });
     });
