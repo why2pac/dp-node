@@ -21,8 +21,7 @@ const express = require('express');
 |         errorLogging: Boolean, Error Logging enabled, Default is true.
 |         logging: Boolean, Logging enabled, Default is false.
 |         static: [String], Static file paths.
-|         redirectNakedToWWW: Boolean, Whether redirect naked domain to www or not, Default is false.
-|         redirectSecureHttp: Boolean, Whether redirect https protocol to http or not, Default is false.
+|         redirectNakedToWWW: Boolean or Object, Whether redirect naked domain to www or not, Default is false.
 |         databaseDsn: [Object], Pre-defined database dsn key as `key`, Default is empty.
 |         mode: String, Supported values are `web` or `job`, Default is `web`.
 |         session: {
@@ -99,13 +98,10 @@ module.exports = (options) => {
     app.use(require('morgan')('short', {}));
   }
 
-  if (defaultVal(options.redirectNakedToWWW, false) || defaultVal(options.redirectSecureHttp, false)) {
-    var opts = {};
+  var redirectOpts = defaultVal(options.redirectNakedToWWW, false);
 
-    if (defaultVal(options.redirectSecureHttp, false)) {
-      opts.protocol = 'https';
-    }
-
+  if (redirectOpts !== false) {
+    var opts = typeof redirectOpts === 'object' ? redirectOpts: {};
     app.use(require('express-naked-redirect')(opts));
   }
 
