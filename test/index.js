@@ -160,6 +160,13 @@ require('../index').Tester.init()((req) => {
         req().get('/model/mysql/tran').expect(200, 'done', done);
       });
     });
+
+    describe('Common', () => {
+      it('Dot notation loader test.', function (done) {
+        this.timeout(5000);
+        req().get('/model/loader').expect(200, 'done', done);
+      });
+    });
   });
 
   describe('View', () => {
