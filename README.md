@@ -59,7 +59,7 @@ App
 
 ```Javascript
 module.exports = {
-    get: (controller) => {  // `controller` parameter is required.
+    get: async (controller) => {  // `controller` parameter is required.
         /*
          *  `controller` exports: {
          *     raw: {
@@ -92,7 +92,7 @@ module.exports = {
             add: add
         };
 
-        controller.render('foo/foo.html', params);
+        await controller.render('foo/foo.html', params);
     }
 };
 ```

@@ -1,5 +1,5 @@
 module.exports = {
-  get: (controller) => {
-    controller.render('view/simple_render.html');
+  get: async (controller) => {
+    await controller.render('view/simple_render.html');
   }
 };

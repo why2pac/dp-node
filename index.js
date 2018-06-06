@@ -1,6 +1,3 @@
-global.async = require('asyncawait/async');
-global.await = require('asyncawait/await');
-
 const express = require('express');
 
 /*
@@ -68,21 +65,19 @@ module.exports = (options) => {
   config.handler.error = errorHandler;
 
   if (typeof config.handler.error === 'function') {
-    config.handler.error = (controller, error, statusCode) => {
-      return async (() => {
-        try {
-          return await (errorHandler(controller, error, statusCode));
-        }
-        catch (e) {
-          console.error(e);
+    config.handler.error = async (controller, error, statusCode) => {
+      try {
+        return await (errorHandler(controller, error, statusCode));
+      }
+      catch (e) {
+        console.error(e);
 
-          if (controller && controller.finisher) {
-            controller.finisher.error('An error has occurred.');
-          }
-
-          return false;
+        if (controller && controller.finisher) {
+          controller.finisher.error('An error has occurred.');
         }
-      })();
+
+        return false;
+      }
     }
   }
 

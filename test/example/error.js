@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-module.exports = (controller, error, statusCode) => {
+module.exports = async (controller, error, statusCode) => {
   // for async-await test
-  var res = controller.model.test.dummy();
+  var res = await controller.model.test.dummy();
 
   assert(res && res['1'] === 1);
 

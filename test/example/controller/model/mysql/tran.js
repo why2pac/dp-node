@@ -1,16 +1,16 @@
 const assert = require('assert');
 
 module.exports = {
-  get: (controller) => {
+  get: async (controller) => {
     var tableSuffix = String(Math.random()).slice(2);
 
-    controller.model.test.tran.dropTable(tableSuffix);
+    await controller.model.test.tran.dropTable(tableSuffix);
 
-    var fail = controller.model.test.tran.fail(tableSuffix);
+    var fail = await controller.model.test.tran.fail(tableSuffix);
 
     assert(!fail);
 
-    var res = controller.model.test.tran.succ(tableSuffix);
+    var res = await controller.model.test.tran.succ(tableSuffix);
 
     assert(res[0].warningCount);
     assert(res[1].insertId === 1);

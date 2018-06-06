@@ -1,11 +1,11 @@
 const assert = require('assert');
 
 module.exports = {
-  dropTable: (db, tableSuffix) => {
-    return db.execute('DROP TABLE IF EXISTS tran_test', stage);
+  dropTable: async(db, tableSuffix) => {
+    return await db.execute('DROP TABLE IF EXISTS tran_test', stage);
   },
-  succ: (db, tableSuffix) => {
-    var res = db.tran([
+  succ: async (db, tableSuffix) => {
+    var res = await db.tran([
       () => {
         return [`
           CREATE TABLE IF NOT EXISTS tran_test_` + tableSuffix + ` (
@@ -45,11 +45,11 @@ module.exports = {
 
     return res;
   },
-  fail: (db, tableSuffix) => {
+  fail: async (db, tableSuffix) => {
     var res = null;
 
     try {
-      res = db.tran([
+      res = await db.tran([
         () => {
           return [`
             CREATE TABLE IF NOT EXISTS tran_test_` + tableSuffix + ` (
