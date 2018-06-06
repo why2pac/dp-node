@@ -56,6 +56,20 @@ require('../index').Tester.init()((req) => {
       it('Response should be `IGNORED` when returned `false` from controller method.', (done) => {
         req().get('/middleware/file/end/ignore').expect(200, 'IGNORED', done);
       });
+
+      describe('Controller', () => {
+        it('Response should be `pre-body-post` when configured pre-post controller.', (done) => {
+          req().get('/middleware/pre-post').expect(200, 'pre-body-post', done);
+        });
+
+        it('Response should be `pre-sub-post` when configured pre-post controller.', (done) => {
+          req().get('/middleware/pre-post/child/sub').expect(200, 'pre-sub-post', done);
+        });
+
+        it('Response should be `r-pre-r-path-r-post` when configured pre-post controller.', (done) => {
+          req().get('/middleware/pre-post/replace/path').expect(200, 'r-pre-r-path-r-post', done);
+        });
+      });
     });
 
     describe('Config', () => {
