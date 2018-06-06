@@ -29,5 +29,9 @@ module.exports = async (controller, error, statusCode) => {
     return controller.finisher.error(error.originalError.message);
   }
 
+  if (controller.params('err') === 'yes') {
+    return controller.finisher.error(error.message || 'An error has occurred.');
+  }
+
   controller.finisher.error('[' + statusCode + '] An error has occurred.');
 };

@@ -169,6 +169,20 @@ require('../index').Tester.init()((req) => {
     });
   });
 
+  describe('Error Handling', () => {
+    it('Response should be `This is an intended exception.`.', function (done) {
+      req().get('/error/handler/throw_from_model?err=yes').expect(500, 'This is an intended exception.', done);
+    });
+
+    it('Response should be error message from database.', function (done) {
+      req().get('/error/handler/throw_from_query?err=yes').then(res => {
+        const Assert = require('assert');
+        Assert(res.text.indexOf('xxx') !== -1);
+        done();
+      });
+    });
+  });
+
   describe('View', () => {
     it('Simple view rendering test.', (done) => {
       req().get('/view/simple_render').expect(200, 'rendered', done);
