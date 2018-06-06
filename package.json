@@ -7,6 +7,10 @@
     "test": "mocha",
     "check": "node ./node_modules/npm-check/bin/cli.js"
   },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=7"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/why2pac/dp-node.git"
