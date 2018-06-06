@@ -73,6 +73,10 @@ require('../index').Tester.init()((req) => {
         it('Response should be `f-pre-for-all-f-post` when configured pre-post controller.', (done) => {
           req().get('/middleware/pre-post/for-all').expect(200, 'f-pre-for-all-f-post', done);
         });
+
+        it('Response should be `An intended exception.` when exception occurred.', (done) => {
+          req().get('/middleware/pre-post/error').expect(500, 'An intended exception.', done);
+        });
       });
     });
 
