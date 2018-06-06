@@ -69,6 +69,10 @@ require('../index').Tester.init()((req) => {
         it('Response should be `r-pre-r-path-r-post` when configured pre-post controller.', (done) => {
           req().get('/middleware/pre-post/replace/path').expect(200, 'r-pre-r-path-r-post', done);
         });
+
+        it('Response should be `f-pre-for-all-f-post` when configured pre-post controller.', (done) => {
+          req().get('/middleware/pre-post/for-all').expect(200, 'f-pre-for-all-f-post', done);
+        });
       });
     });
 
