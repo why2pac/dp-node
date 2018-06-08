@@ -1,4 +1,3 @@
-require('asyncawait');
 require('express');
 require('cookie');
 require('cookie-parser');
