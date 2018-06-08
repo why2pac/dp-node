@@ -48,7 +48,7 @@
     "knex": "^0.14.6",
     "morgan": "^1.9.0",
     "promised-handlebars": "^2.0.1",
-    "redis-fast-driver": "^2.1.2",
+    "redis": "^2.8.0",
     "uid-safe": "^2.1.5"
   },
   "devDependencies": {

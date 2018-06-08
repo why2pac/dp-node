@@ -143,6 +143,13 @@ require('../index').Tester.init()((req) => {
       });
     });
 
+    describe('Session', () => {
+      it('Simple session test.', function (done) {
+        this.timeout(5000);
+        req().get('/session').expect(200, 'done', done);
+      });
+    });
+
     describe('Error Handling', () => {
       describe('Finisher', () => {
         it('Response should be `NOTFOUND` with 404 status code.', (done) => {

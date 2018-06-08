@@ -1,4 +1,11 @@
 module.exports = {
+  sleep: (db, time) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, time);
+    });
+  },
   createTable: (db) => {
     return db.execute(`
       CREATE TABLE IF NOT EXISTS simple_test (

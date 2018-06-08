@@ -21,7 +21,15 @@ var options = {
     redirectNakedToWWW: global.optionRedirectNakedToWWW || true,
     requestSizeLimit: global.optionsRequestSizeLimit || '1MB',
     viewHelpers: require('./helper'),
-    session: undefined,
+    session: {
+      driver: 'redis',
+      secret: 'session-secret-text',
+      ttl: 3,
+      volatility: true,
+      connection: {
+        host: '127.0.0.1'
+      }
+    },
     error: require('./error'),
     errorLogging: global.isTest ? false : true,
     cookie: {
