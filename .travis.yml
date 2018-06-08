@@ -5,6 +5,7 @@ node_js:
   - "9"
 services:
   - mysql
+  - redis-server
 sudo: false
 cache:
   directories:

@@ -15,6 +15,9 @@ install:
   - node -v
   - SET PATH=C:\Program Files\MySql\MySQL Server 5.7\bin\;%PATH%
   - npm install
+  - nuget install redis-64 -excludeversion
+  - redis-64\tools\redis-server.exe --service-install
+  - redis-64\tools\redis-server.exe --service-start
 build: off
 before_test:
   - mysql -uroot -pPassword12! -e "CREATE DATABASE IF NOT EXISTS dp_node;"
