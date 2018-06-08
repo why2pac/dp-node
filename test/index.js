@@ -234,6 +234,16 @@ require('../index').Tester.init()((req) => {
         done();
       });
     });
+
+    it('Response should be `done` for async job test.', function (done) {
+      this.timeout(5000);
+
+      const jobTest = new CliTest();
+      jobTest.exec('node test/example/job/async_job.js').then((res) => {
+        Assert(String(res.stdout) === 'done');
+        done();
+      });
+    });
   });
 
   describe('/middleware', () => {
