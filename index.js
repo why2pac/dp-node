@@ -176,7 +176,8 @@ module.exports = (options) => {
     return require('./lib/job')(config);
   }
 
-  return dp;
+  dp.app.dp = dp;
+  return dp.app;
 }
 
 module.exports.Tester = require('./lib/tester');
