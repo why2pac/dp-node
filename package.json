@@ -1,6 +1,6 @@
 {
   "name": "dp-node",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Faster, cheaper, better web framework for Node.js",
   "main": "index.js",
   "scripts": {
