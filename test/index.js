@@ -251,6 +251,16 @@ require('../index').Tester.init()((req) => {
         done();
       });
     });
+
+    it('Response should be `rendered` for rendering a view.', function (done) {
+      this.timeout(5000);
+
+      const jobTest = new CliTest();
+      jobTest.exec('node test/example/job/render_view.js').then((res) => {
+        Assert(String(res.stdout) === 'rendered');
+        done();
+      });
+    });
   });
 
   describe('/middleware', () => {
