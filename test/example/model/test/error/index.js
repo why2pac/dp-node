@@ -3,8 +3,7 @@ module.exports = {
     throw Error('This is an intended exception.')
   },
   throwFromQuery: async (db) => {
-    return await (db.row(`
-      SELECT xxx
-    `, stage))
+    const res = await db.row(`SELECT xxx`, global.stage)
+    return res
   }
 }

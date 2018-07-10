@@ -2,7 +2,7 @@ const assert = require('assert')
 
 global.mode = 'job'
 require('../app')(async (dp) => {
-  var create = await dp.model.test.createTable()
+  var create = await dp.model.test.createTable() // eslint-disable-line
   var insert = await dp.model.test.insertRecord()
   var inserted = await dp.model.test.inquiryRecord()
 

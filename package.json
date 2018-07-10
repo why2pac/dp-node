@@ -4,7 +4,7 @@
   "description": "Faster, cheaper, better web framework for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "npm run lint && mocha",
     "check": "node ./node_modules/npm-check/bin/cli.js",
     "lint": "./node_modules/standard/bin/cmd.js",
     "lintfix": "./node_modules/standard/bin/cmd.js --fix",
@@ -31,7 +31,10 @@
   },
   "homepage": "https://github.com/why2pac/dp-node#readme",
   "standard": {
-    "env": [ "mocha" ]
+    "env": [ "mocha" ],
+    "ignore": [
+      "/lib/static/**/*.js"
+    ]
   },
   "dependencies": {
     "bluebird": "^3.5.1",

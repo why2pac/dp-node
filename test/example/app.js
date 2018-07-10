@@ -35,7 +35,7 @@ var options = {
     secret: 'cookie-secret-modify-this-value-in-production'
   },
   databaseDsn: Object.keys(databaseDsn).filter((e) => {
-    return e.startsWith(stage)
+    return e.startsWith(global.stage)
   }).map((e) => { return databaseDsn[e] })
 }
 

@@ -29,11 +29,11 @@ require('../index').Tester.init()((req) => {
 
       describe('Request', () => {
         it('Response should be requested url.', (done) => {
-          req().get('/controller/req/url').expect(200, 'http://127.0.0.1:' + DP_TEST_PORT, done)
+          req().get('/controller/req/url').expect(200, `http://127.0.0.1:${global.DP_TEST_PORT}`, done)
         })
 
         it('Response should be requested uri.', (done) => {
-          req().get('/controller/req/uri').expect(200, 'http://127.0.0.1:' + DP_TEST_PORT + '/controller/req/uri', done)
+          req().get('/controller/req/uri').expect(200, `http://127.0.0.1:${global.DP_TEST_PORT}/controller/req/uri`, done)
         })
       })
 

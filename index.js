@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 
 /*
 |* dp for Node
@@ -129,7 +130,7 @@ module.exports = (options) => {
     config.cfg.databaseDsn = options.databaseDsn
   }
 
-  app.use('/dp', express.static(__dirname + '/lib/static'))
+  app.use('/dp', express.static(path.resolve(__dirname, '/lib/static')))
 
   if (options.static) {
     var paths = options.static

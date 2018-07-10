@@ -2,7 +2,8 @@ const assert = require('assert')
 
 module.exports = {
   dropTable: async (db, tableSuffix) => {
-    return await db.execute('DROP TABLE IF EXISTS tran_test', stage)
+    const res = await db.execute('DROP TABLE IF EXISTS tran_test', global.stage)
+    return res
   },
   succ: async (db, tableSuffix) => {
     var res = await db.tran([
@@ -41,7 +42,7 @@ module.exports = {
       (tr1, tr2, tr3, tr4, tr5) => {
         return [`DROP TABLE tran_test_` + tableSuffix]
       }
-    ], stage)
+    ], global.stage)
 
     return res
   },
@@ -66,7 +67,7 @@ module.exports = {
         () => {
           return [`SELECT value FROM tran_test_` + tableSuffix + ` ORDER BY id ASC`]
         }
-      ], stage)
+      ], global.stage)
     } catch (e) {
       return false
     }
