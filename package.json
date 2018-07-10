@@ -6,9 +6,9 @@
   "scripts": {
     "test": "npm run lint && mocha",
     "check": "node ./node_modules/npm-check/bin/cli.js",
-    "lint": "./node_modules/standard/bin/cmd.js",
-    "lintfix": "./node_modules/standard/bin/cmd.js --fix",
-    "lintmon": "./node_modules/nodemon/bin/nodemon.js --exec 'npm run lint'"
+    "lint": "standard",
+    "lintfix": "standard --fix",
+    "lintmon": "./node_modules/nodemon/bin/nodemon.js --exec './node_modules/standard/bin/cmd.js'"
   },
   "engineStrict": true,
   "engines": {
@@ -31,7 +31,9 @@
   },
   "homepage": "https://github.com/why2pac/dp-node#readme",
   "standard": {
-    "env": [ "mocha" ],
+    "env": [
+      "mocha"
+    ],
     "ignore": [
       "/lib/static/**/*.js"
     ]
