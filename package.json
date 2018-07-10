@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "check": "node ./node_modules/npm-check/bin/cli.js"
+    "check": "node ./node_modules/npm-check/bin/cli.js",
+    "lint": "./node_modules/standard/bin/cmd.js",
+    "lintfix": "./node_modules/standard/bin/cmd.js --fix",
+    "lintmon": "./node_modules/nodemon/bin/nodemon.js --exec 'npm run lint'"
   },
   "engineStrict": true,
   "engines": {
@@ -27,6 +30,9 @@
     "url": "https://github.com/why2pac/dp-node/issues"
   },
   "homepage": "https://github.com/why2pac/dp-node#readme",
+  "standard": {
+    "env": [ "mocha" ]
+  },
   "dependencies": {
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
@@ -56,8 +62,10 @@
     "find-port-sync": "^1.1.1",
     "mocha": "^5.2.0",
     "mysql": "^2.15.0",
+    "nodemon": "^1.17.5",
     "npm-check": "^5.7.1",
     "should": "^13.2.1",
+    "standard": "^11.0.1",
     "supertest": "^3.1.0"
   }
 }
