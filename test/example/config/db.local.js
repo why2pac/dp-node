@@ -13,4 +13,4 @@ module.exports = {
     min: 0,
     max: 3
   }
-};
+}

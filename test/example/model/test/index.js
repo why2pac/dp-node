@@ -3,8 +3,8 @@ module.exports = {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve()
-      }, time);
-    });
+      }, time)
+    })
   },
   createTable: (db) => {
     return db.execute(`
@@ -12,13 +12,13 @@ module.exports = {
         id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         value VARCHAR(32) DEFAULT 'EMPTY'
       );
-    `, stage);
+    `, stage)
   },
   insertRecord: (db) => {
     return db.execute(`
       INSERT INTO simple_test
         (value) VALUES (?)
-    `, ['test'], stage);
+    `, ['test'], stage)
   },
   inquiryRecord: (db) => {
     return db.row(`
@@ -28,9 +28,9 @@ module.exports = {
         simple_test
       WHERE
         id = 1
-    `, stage);
+    `, stage)
   },
   dummy: (db) => {
-    return db.row(`SELECT 1`, stage);
+    return db.row(`SELECT 1`, stage)
   }
-};
+}

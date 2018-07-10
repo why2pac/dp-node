@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    throw Error('ERROR');
+    throw Error('ERROR')
   }
-};
+}

@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finish('/routing/sub/path');
+    controller.finish('/routing/sub/path')
   }
-};
+}

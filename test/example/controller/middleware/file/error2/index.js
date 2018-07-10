@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    throw Error('/middleware/file/error');
+    throw Error('/middleware/file/error')
   }
 }

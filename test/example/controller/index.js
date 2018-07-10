@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finish('dp-node');
+    controller.finish('dp-node')
   }
 }

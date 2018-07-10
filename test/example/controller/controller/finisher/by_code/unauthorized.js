@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finisher.unauthorized('UNAUTHORIZED');
+    controller.finisher.unauthorized('UNAUTHORIZED')
   }
 }

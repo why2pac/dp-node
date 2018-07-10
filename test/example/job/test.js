@@ -1,4 +1,4 @@
-global.mode = 'job';
+global.mode = 'job'
 require('../app')((dp) => {
-  console.log('done');
-});
+  console.log('done')
+})

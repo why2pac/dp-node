@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finisher.denied('DENIED');
+    controller.finisher.denied('DENIED')
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finish(controller.req.uri());
+    controller.finish(controller.req.uri())
   }
 }

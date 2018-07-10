@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finisher.invalid('INVALID');
+    controller.finisher.invalid('INVALID')
   }
 }
