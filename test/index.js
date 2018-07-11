@@ -188,6 +188,11 @@ require('../index').Tester.init()((req) => {
         this.timeout(5000)
         req().get('/model/mysql/tran').expect(200, 'done', done)
       })
+
+      it('Grouping with prefix.', function (done) {
+        this.timeout(5000)
+        req().get('/model/mysql/group').expect(200, 'done', done)
+      })
     })
 
     describe('Common', () => {
