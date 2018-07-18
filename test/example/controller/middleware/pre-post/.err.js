@@ -1,3 +1,3 @@
-module.exports = (controller, error) => {
+module.exports = async (controller, error) => {
   return `${error.message}`;
 };

@@ -77,6 +77,10 @@ require('../index').Tester.init()((req) => {
         it('Response should be `An intended exception.` when exception occurred.', (done) => {
           req().get('/middleware/pre-post/error').expect(500, 'An intended exception.', done)
         })
+
+        it('Response should be `Not Found` when access not exists location.', (done) => {
+          req().get('/middleware/pre-post/not-found').expect(404, 'Not Found', done)
+        })
       })
     })
 
