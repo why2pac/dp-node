@@ -54,8 +54,8 @@ module.exports = (options) => {
 
   config.cfg = {}
   config.cfg.apppath = options.apppath
-  config.cfg.controller = options.apppath + ('/controller' || options.controllerPath)
-  config.cfg.view = options.apppath + ('/view' || options.viewPath)
+  config.cfg.controller = options.apppath + (options.controllerPath || '/controller')
+  config.cfg.view = options.apppath + (options.viewPath || '/view')
   config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(options.minifyRemoveLineBreakWhitespace, true)
   config.cfg.requestSizeLimit = options.requestSizeLimit || '0.5mb'
   config.cfg.errorLogging = defaultVal(options.errorLogging, true)
