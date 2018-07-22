@@ -124,7 +124,7 @@ module.exports = {
 #### App/view/foo/foo.html / foo/foo.html
 
 ```HTML
-<p>{{arg1} + {{arg2}} = <strong>{{add}}</strong></p>
+<p>{{arg1}} + {{arg2}} = <strong>{{add}}</strong></p>
 ```
 
 ### Install
