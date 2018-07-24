@@ -84,12 +84,12 @@ module.exports = {
 
         var arg1 = 10;
         var arg2 = 20;
-        var add = controller.model.foo.bar.add(arg1, arg2);  // == 30
+        var res = controller.model.foo.bar.add(arg1, arg2);  // == 30
 
         var params = {
             arg1: arg1,
             arg2: arg2,
-            add: add
+            res: res
         };
 
         await controller.render('foo/foo.html', params);
@@ -124,7 +124,7 @@ module.exports = {
 #### App/view/foo/foo.html / foo/foo.html
 
 ```HTML
-<p>{{arg1} + {{arg2}} = <strong>{{add}}</strong></p>
+<p>{{arg1}} + {{arg2}} = <strong>{{res}}</strong></p>
 ```
 
 ### Install
