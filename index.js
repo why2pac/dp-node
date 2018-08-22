@@ -114,11 +114,11 @@ module.exports = (options) => {
   }
 
   if (options.preMiddlewares) {
-    var preMiddlewares = Array.isArray(options.preMiddlewares) ?
-      options.preMiddlewares : [options.preMiddlewares];
+    var preMiddlewares = Array.isArray(options.preMiddlewares)
+      ? options.preMiddlewares : [options.preMiddlewares]
 
     for (var i = 0; i < preMiddlewares.length; i += 1) {
-      app.use(preMiddlewares[i]);
+      app.use(preMiddlewares[i])
     }
   }
 
