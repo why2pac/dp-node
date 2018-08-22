@@ -11,6 +11,7 @@ const path = require('path')
 |         viewPath: String, View Path, Default is 'view'
 |         port: Int, Binding port, If specified, will bind automatically.
 |         debug: Boolean, Debug Mode, Default is false.
+|         preMiddlewares: Object, Pre middlewares, Default is null.
 |         compression: Boolean, Compression, Default is true.
 |         enhanceSecurity: Boolean, Security(Helmet), Default is true.
 |         minifyRemoveLineBreakWhitespace: Boolean, Whether if remove line break whitespace or not, Default is true.
@@ -110,6 +111,15 @@ module.exports = (options) => {
 
   if (defaultVal(options.cookieEnabled, true)) {
     app.use(require('cookie-parser')())
+  }
+
+  if (options.preMiddlewares) {
+    var preMiddlewares = Array.isArray(options.preMiddlewares) ?
+      options.preMiddlewares : [options.preMiddlewares];
+
+    for (var i = 0; i < preMiddlewares.length; i += 1) {
+      app.use(preMiddlewares[i]);
+    }
   }
 
   if (defaultVal(options.session, {})) {
