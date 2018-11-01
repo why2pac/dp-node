@@ -14,6 +14,6 @@ module.exports = {
     max: 3
   },
   options: {
-    bindObjectAsString: true,
-  },
+    bindObjectAsString: true
+  }
 }

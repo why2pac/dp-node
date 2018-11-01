@@ -1,17 +1,17 @@
 const assert = require('assert')
-const fn = function () {
+const Fn = function () {
   this.name = 'dp-fn'
 }
 
-fn.prototype.inspect = function () {
+Fn.prototype.inspect = function () {
   return 'inspect'
 }
 
-fn.prototype.toString = function () {
+Fn.prototype.toString = function () {
   return 'toString'
 }
 
-fn.prototype.toJSON = function () {
+Fn.prototype.toJSON = function () {
   return 'toJSON'
 }
 
@@ -23,7 +23,7 @@ module.exports = {
       knex = db.knex(global.stage)
 
       await knex.insert({
-        ['value']: new fn()
+        'value': new Fn()
       }).into('simple_test')
 
       throw Error('No!')
@@ -31,7 +31,7 @@ module.exports = {
       knex = db.knex(`${global.stage}Opt`)
 
       await knex.insert({
-        ['value']: new fn()
+        'value': new Fn()
       }).into('simple_test')
     }
 
