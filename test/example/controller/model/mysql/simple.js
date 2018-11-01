@@ -9,6 +9,8 @@ module.exports = {
     assert(insert.insertId)
     assert(inserted.id && inserted.value)
 
+    await controller.model.test.options.test()
+
     return 'done'
   }
 }
