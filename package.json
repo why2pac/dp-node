@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && mocha",
+    "testonly": "mocha",
     "check": "node ./node_modules/npm-check/bin/cli.js",
     "lint": "standard",
     "lintfix": "standard --fix",
