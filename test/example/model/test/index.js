@@ -26,8 +26,9 @@ module.exports = {
         *
       FROM
         simple_test
-      WHERE
-        id = 1
+      ORDER BY
+        id ASC
+      LIMIT 1
     `, global.stage)
   },
   dummy: (db) => {
