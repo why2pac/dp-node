@@ -111,6 +111,29 @@ module.exports = {
       .whereIn('value', [new Fn(1000)])
       .orWhereNotIn('value', [new Fn(2000)]))[0].cnt === 3)
 
-    return res
+    await db.knex(global.stage).from('simple_test').where(true).delete()
+
+    try {
+      knex = db.knex(global.stage)
+
+      await knex.batchInsert('simple_test', [1, 2, 3, 4, 5].map(e => ({
+        'value': new Fn(e)
+      })))
+
+      throw Error('No!')
+    } catch (e) {
+      knex = db.knex(`${global.stage}Opt`)
+
+      const res = await knex.batchInsert('simple_test', [1, 2, 3, 4, 5].map(e => ({
+        'value': new Fn(e)
+      })))
+      console.log(res)
+    }
+
+    const rows = await db.knex(global.stage).from('simple_test').orderBy('id', 'desc').limit(5)
+
+    assert(rows.length === 5 && rows[0].value === 'toString(5)')
+
+    return true
   }
 }

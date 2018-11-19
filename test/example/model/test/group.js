@@ -2,6 +2,10 @@ const assert = require('assert')
 
 module.exports = {
   test: async (db) => {
+    await db.knex(global.stage).insert({
+      value: '1234'
+    }).into('simple_test')
+
     const res = await db.knex(global.stage)
       .select(['id AS id', 'value as val'], 'pfx')
       .from('simple_test')
