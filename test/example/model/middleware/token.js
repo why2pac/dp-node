@@ -1,3 +1,5 @@
 module.exports = {
-  validate: (model, token) => token && String(token).length === 10,
+  validate(token) {
+    return token && String(token).length === 10;
+  },
 };
