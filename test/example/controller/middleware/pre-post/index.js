@@ -1,3 +1,5 @@
 module.exports = {
-  get: (controller, data) => `${data}-body`,
+  async get(data) {
+    return `${data}-body`;
+  },
 };
