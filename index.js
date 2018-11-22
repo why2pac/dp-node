@@ -61,7 +61,7 @@ module.exports = (options) => {
   config.cfg.view = options.apppath + (options.viewPath || '/view');
   config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(
     options.minifyRemoveLineBreakWhitespace,
-    true,
+    true // eslint-disable-line comma-dangle
   );
   config.cfg.requestSizeLimit = options.requestSizeLimit || '0.5mb';
   config.cfg.errorLogging = defaultVal(options.errorLogging, true);
