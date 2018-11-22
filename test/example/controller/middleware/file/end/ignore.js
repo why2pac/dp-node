@@ -1,6 +1,6 @@
 module.exports = {
   get: (controller) => {
-    controller.finish('IGNORED')
-    return true
-  }
-}
+    controller.finish('IGNORED');
+    return true;
+  },
+};

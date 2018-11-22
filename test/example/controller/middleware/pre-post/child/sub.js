@@ -1,5 +1,3 @@
 module.exports = {
-  get: (controller, data) => {
-    return `${data}-sub`
-  }
-}
+  get: (controller, data) => `${data}-sub`,
+};

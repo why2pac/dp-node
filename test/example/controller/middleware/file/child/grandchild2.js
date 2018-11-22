@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finish('file/child/grandchild2')
-  }
-}
+    controller.finish('file/child/grandchild2');
+  },
+};

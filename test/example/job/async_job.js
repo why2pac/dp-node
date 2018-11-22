@@ -1,13 +1,14 @@
-const assert = require('assert')
+const assert = require('assert');
 
-global.mode = 'job'
+global.mode = 'job';
 require('../app')(async (dp) => {
-  var create = await dp.model.test.createTable() // eslint-disable-line
-  var insert = await dp.model.test.insertRecord()
-  var inserted = await dp.model.test.inquiryRecord()
+  await dp.model.test.createTable();
 
-  assert(insert.insertId)
-  assert(inserted.id && inserted.value)
+  const insert = await dp.model.test.insertRecord();
+  const inserted = await dp.model.test.inquiryRecord();
 
-  console.log('done')
-})
+  assert(insert.insertId);
+  assert(inserted.id && inserted.value);
+
+  console.log('done'); // eslint-disable-line no-console
+});

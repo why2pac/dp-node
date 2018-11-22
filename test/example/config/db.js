@@ -1,8 +1,15 @@
+const local = require('./db.local');
+const localOpt = require('./db.local.opt');
+const testAppveyor = require('./db.test.appveyor');
+const testAppveyorOpt = require('./db.test.appveyor.opt');
+const testTravis = require('./db.test.travis');
+const testTravisOpt = require('./db.test.travis.opt');
+
 module.exports = {
-  local: require('./db.local'),
-  localOpt: require('./db.local.opt'),
-  testAppveyor: require('./db.test.appveyor'),
-  testAppveyorOpt: require('./db.test.appveyor.opt'),
-  testTravis: require('./db.test.travis'),
-  testTravisOpt: require('./db.test.travis.opt')
-}
+  local,
+  localOpt,
+  testAppveyor,
+  testAppveyorOpt,
+  testTravis,
+  testTravisOpt,
+};

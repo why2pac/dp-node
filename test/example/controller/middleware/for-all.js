@@ -1,19 +1,20 @@
 module.exports = {
   middleware: (req, res, next) => {
-    var token = req.get('DP-NODE-TOKEN')
+    const token = req.get('DP-NODE-TOKEN');
 
     res.async((dp) => {
       if (!dp.model.middleware.token.validate(token)) {
-        return res.status(400).send('INVALID-TOKEN')
+        res.status(400).send('INVALID-TOKEN');
+        return;
       }
 
-      next()
-    })
+      next();
+    });
   },
   get: (controller) => {
-    controller.finish('DONE')
+    controller.finish('DONE');
   },
   post: (controller) => {
-    controller.finish('DONE')
-  }
-}
+    controller.finish('DONE');
+  },
+};

@@ -4,8 +4,7 @@
   "description": "Faster, cheaper, better web framework for Node.js",
   "main": "index.js",
   "scripts": {
-    "test-with-lint": "npm run lint && mocha",
-    "test": "mocha",
+    "test": "npm run lint && mocha",
     "testonly": "mocha",
     "check": "npm-check",
     "lint": "eslint ./",
@@ -68,7 +67,7 @@
   "devDependencies": {
     "command-line-test": "^1.0.10",
     "eslint": "^5.9.0",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.7.0",
     "find-port-sync": "^1.1.1",
     "mocha": "^5.2.0",

@@ -1,5 +1,3 @@
 module.exports = {
-  test: (db) => {
-    return 'model.loader.foo.fozCamel.withIndex.test'
-  }
-}
+  test: () => 'model.loader.foo.fozCamel.withIndex.test',
+};

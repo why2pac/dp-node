@@ -1,5 +1,3 @@
 module.exports = {
-  test: (db) => {
-    return 'model.loader.bar.bazCamel.foo.test'
-  }
-}
+  test: () => 'model.loader.bar.bazCamel.foo.test',
+};

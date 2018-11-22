@@ -1,5 +1,3 @@
 module.exports = {
-  get: (controller, data) => {
-    return `${data}-body`
-  }
-}
+  get: (controller, data) => `${data}-body`,
+};

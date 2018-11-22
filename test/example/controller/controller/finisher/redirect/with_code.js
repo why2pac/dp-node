@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.redirect('/', 301)
-  }
-}
+    controller.redirect('/', 301);
+  },
+};

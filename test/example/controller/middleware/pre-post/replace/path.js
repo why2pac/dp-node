@@ -1,5 +1,3 @@
 module.exports = {
-  get: (controller, data) => {
-    return `${data}-r-path`
-  }
-}
+  get: (controller, data) => `${data}-r-path`,
+};

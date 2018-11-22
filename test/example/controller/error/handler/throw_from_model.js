@@ -1,5 +1,3 @@
 module.exports = {
-  get: async (controller) => {
-    return controller.model.test.error.throwFromMethod()
-  }
-}
+  get: async controller => controller.model.test.error.throwFromMethod(),
+};

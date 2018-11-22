@@ -7,10 +7,10 @@ module.exports = {
     port: 3306,
     charset: 'utf8',
     user: 'root',
-    password: 'Password12!'
+    password: 'Password12!',
   },
   pool: {
     min: 0,
-    max: 3
-  }
-}
+    max: 3,
+  },
+};

@@ -1,15 +1,16 @@
-'use strict'
-
-global.stage = 'local'
+global.stage = 'local';
 
 if (process.env.APPVEYOR) {
-  global.stage = 'testAppveyor'
+  global.stage = 'testAppveyor';
 } else if (process.env.TRAVIS) {
-  global.stage = 'testTravis'
+  global.stage = 'testTravis';
 }
 
-var databaseDsn = require('./config/db')
-var options = {
+const databaseDsn = require('./config/db');
+const error = require('./error');
+const viewHelpers = require('./helper');
+
+const options = {
   apppath: __dirname,
   mode: global.mode || null,
   port: process.env.PORT || (global.isTest ? null : 7777),
@@ -19,25 +20,26 @@ var options = {
   compression: global.optionCompression || false,
   redirectNakedToWWW: global.optionRedirectNakedToWWW || true,
   requestSizeLimit: global.optionsRequestSizeLimit || '1MB',
-  viewHelpers: require('./helper'),
+  viewHelpers,
   session: {
     driver: 'redis',
     secret: 'session-secret-text',
     ttl: 3,
     volatility: true,
     connection: {
-      host: '127.0.0.1'
-    }
+      host: '127.0.0.1',
+    },
   },
-  error: require('./error'),
+  error,
   errorLogging: !global.isTest,
   cookie: {
-    secret: 'cookie-secret-modify-this-value-in-production'
+    secret: 'cookie-secret-modify-this-value-in-production',
   },
-  databaseDsn: Object.keys(databaseDsn).filter((e) => {
-    return e.startsWith(global.stage)
-  }).map((e) => { return databaseDsn[e] })
-}
+  databaseDsn: Object.keys(databaseDsn)
+    .filter(e => e.startsWith(global.stage))
+    .map(e => databaseDsn[e]),
+};
 
-var dp = require('../../index')(options)
-module.exports = dp
+const dp = require('../../index')(options);
+
+module.exports = dp;

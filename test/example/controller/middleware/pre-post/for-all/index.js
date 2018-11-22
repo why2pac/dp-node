@@ -1,5 +1,3 @@
 module.exports = {
-  get: (controller, data) => {
-    return `${data}-for-all`
-  }
-}
+  get: (controller, data) => `${data}-for-all`,
+};

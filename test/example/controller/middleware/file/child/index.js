@@ -1,5 +1,5 @@
 module.exports = {
   get: (controller) => {
-    controller.finish('file/child/get')
-  }
-}
+    controller.finish('file/child/get');
+  },
+};

@@ -1,9 +1,9 @@
 module.exports = {
-  throwFromMethod: (db) => {
-    throw Error('This is an intended exception.')
+  throwFromMethod: () => {
+    throw Error('This is an intended exception.');
   },
   throwFromQuery: async (db) => {
-    const res = await db.row(`SELECT xxx`, global.stage)
-    return res
-  }
-}
+    const res = await db.row('SELECT xxx', global.stage);
+    return res;
+  },
+};

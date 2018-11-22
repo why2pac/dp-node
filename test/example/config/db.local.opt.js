@@ -7,13 +7,13 @@ module.exports = {
     port: 3306,
     charset: 'utf8',
     user: 'dp_node',
-    password: 'dp_node'
+    password: 'dp_node',
   },
   pool: {
     min: 0,
-    max: 3
+    max: 3,
   },
   options: {
-    bindObjectAsString: true
-  }
-}
+    bindObjectAsString: true,
+  },
+};
