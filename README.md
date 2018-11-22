@@ -59,9 +59,9 @@ App
 
 ```Javascript
 module.exports = {
-    get: async (controller) => {  // `controller` parameter is required.
+    async get() => {
         /*
-         *  `controller` exports: {
+         *  `this` exports: {
          *     raw: {
          *        req: return express `req` object.
          *        res: return express `res` object.
@@ -84,7 +84,7 @@ module.exports = {
 
         var arg1 = 10;
         var arg2 = 20;
-        var res = controller.model.foo.bar.add(arg1, arg2);  // == 30
+        var res = this.model.foo.bar.add(arg1, arg2);  // == 30
 
         var params = {
             arg1: arg1,
@@ -92,7 +92,7 @@ module.exports = {
             res: res
         };
 
-        await controller.render('foo/foo.html', params);
+        await this.render('foo/foo.html', params);
     }
 };
 ```
@@ -103,15 +103,31 @@ module.exports = {
 
 ```Javascript
 module.exports = {
-    add: (db, arg1, arg2) => {  // `db` parameter is required.
+    add(arg1, arg2) {
         /*
-         *  `db` exports: {
+         *  `this` exports: {
          *     knex: (dsn)
          *     row: (query, params, dsn)
          *     rows: (query, params, dsn)
          *     execute: (query, params, dsn)
          *     tran: (blocks, dsn)
          *  }
+         */
+
+        return arg1 + arg2;
+    }
+};
+```
+
+### Helper
+
+#### App/helper/foo/bar/index.js / helper.foo.bar
+
+```Javascript
+module.exports = {
+    add(arg1, arg2) {
+        /*
+         *  `this` exports: helpers
          */
 
         return arg1 + arg2;
