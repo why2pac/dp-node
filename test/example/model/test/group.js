@@ -1,12 +1,12 @@
 const assert = require('assert');
 
 module.exports = {
-  test: async (db) => {
-    await db.knex(global.stage).insert({
+  async test() {
+    await this.knex(global.stage).insert({
       value: '1234',
     }).into('simple_test');
 
-    const res = await db.knex(global.stage)
+    const res = await this.knex(global.stage)
       .select(['id AS id', 'value as val'], 'pfx')
       .from('simple_test');
 
@@ -14,28 +14,28 @@ module.exports = {
     assert(res[0].pfx_id);
     assert(res[0].pfx_val);
 
-    const rows = db.grouping('pfx', res);
+    const rows = this.grouping('pfx', res);
 
     assert(rows[0].pfx.id);
     assert(rows[0].pfx.val);
 
-    const row = db.grouping('pfx', res[0]);
+    const row = this.grouping('pfx', res[0]);
 
     assert(row.pfx.id);
     assert(row.pfx.val);
 
-    const resPromised = db.knex(global.stage)
+    const resPromised = this.knex(global.stage)
       .select(['id AS id', 'value as val'], 'pfx')
       .from('simple_test');
 
     const pgPage = 1;
     const pgRpp = 10;
 
-    const pg = await db.paginate(
+    const pg = await this.paginate(
       resPromised,
       pgPage,
       pgRpp,
-      db.grouping(['pfx']) // eslint-disable-line comma-dangle
+      this.grouping(['pfx']) // eslint-disable-line comma-dangle
     );
 
     assert(pg[0]);
