@@ -5,4 +5,7 @@ module.exports = {
     });
   },
   bazAsync: async helper => helper.foo.baz(),
+  boz() {
+    return this.foo.boz;
+  },
 };

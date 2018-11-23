@@ -211,6 +211,11 @@ require('../index').Tester.init()((req) => {
         this.timeout(5000);
         req().get('/model/loader').expect(200, 'done', done);
       });
+
+      it('Property test.', function anonymous(done) {
+        this.timeout(5000);
+        req().get('/model/prop').expect(200, 'done', done);
+      });
     });
   });
 

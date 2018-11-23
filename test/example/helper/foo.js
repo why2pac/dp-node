@@ -3,4 +3,5 @@ module.exports = {
     return 'bar';
   },
   baz: () => 'baz',
+  boz: 'boz',
 };
