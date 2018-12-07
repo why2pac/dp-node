@@ -1,6 +1,6 @@
 module.exports = {
   underscoreCalc(a, b) {
-    return this._.underscore.calc(a, b);
+    return this._.underscore.calc(this._.uscore.baz.ret(a), b);
   },
   sleep: (db, time) => new Promise((resolve) => {
     setTimeout(() => {
