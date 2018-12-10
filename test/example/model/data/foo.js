@@ -4,4 +4,5 @@ module.exports = {
   boz() {
     return 'boz';
   },
+  pre: 'pre',
 };

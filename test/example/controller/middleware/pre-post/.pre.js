@@ -1,5 +1,5 @@
 module.exports = {
-  get: (controller) => {
-    return 'pre';
+  async get() {
+    return this.model.data.foo.pre;
   }
 }
