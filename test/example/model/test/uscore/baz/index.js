@@ -3,10 +3,9 @@ module.exports = {
     return a;
   },
   boo() {
-    //this.model.test.uscore.baz;
     return this._;
   },
-  foo() {
-    return this.__;
+  koo() {
+    return this.__.bar.koo; // eslint-disable-line no-underscore-dangle
   },
 };

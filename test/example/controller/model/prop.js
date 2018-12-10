@@ -8,8 +8,8 @@ module.exports = {
     assert(this.model.test.underscoreCalc(1, 2) === this.model.test.underscore.calc(1, 2));
     assert(this.model.test.underscore.dblUnderscore(1, 2) === this.model.test.underscoreCalc(1, 2));
     assert(this.model.test.uscore.baz.boo().foz.zoo === 'zoo');
-
-    console.log(this.model.test.uscore.baz.foo());
+    assert(this.model.test.uscore.baz.koo() === 'koo');
+    assert(this.model.test.uscore.foo.fao() === this.model.test.uscore.foo.far.fao);
 
     return 'done';
   },
