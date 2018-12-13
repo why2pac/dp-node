@@ -136,6 +136,10 @@ require('../index').Tester.init()((req) => {
             req().get(url).expect(200, url, done);
           });
 
+          it('Response should be `URL` when configured absolute prefix path with controller prefix with regex.', (done) => {
+            req().get('/globally_replaced_with_regex/1234').expect(200, '1234', done);
+          });
+
           it('Response should be `URL` when configured absolute prefix path with controller prefix for all methods.', (done) => {
             const url = '/globally_replaced_to_root_all/param_val';
             req().get(url).expect(200, url, done);
