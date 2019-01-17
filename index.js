@@ -44,13 +44,7 @@ module.exports = (options) => {
   let app = options ? options.app : null;
   const config = {};
 
-  const defaultVal = (val, defVal) => {
-    if (val === undefined) {
-      return defVal;
-    }
-
-    return val;
-  };
+  const defaultVal = (val, defVal) => (typeof val === 'undefined' ? defVal : val);
 
   config.mode = (options.mode || 'web').toLowerCase();
   config.debug = defaultVal(options.debug, false);
