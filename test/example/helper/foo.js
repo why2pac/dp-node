@@ -4,4 +4,6 @@ module.exports = {
   },
   baz: () => 'baz',
   boz: 'boz',
+  qux: () => 'qux',
+  quux: 'quux',
 };

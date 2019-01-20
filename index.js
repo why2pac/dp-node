@@ -41,7 +41,7 @@ const path = require('path');
 |*
 */
 module.exports = (options) => {
-  let app = options ? options.app : null;
+  let { app } = options;
   const config = {};
 
   const defaultVal = (val, defVal) => (typeof val === 'undefined' ? defVal : val);
@@ -60,44 +60,36 @@ module.exports = (options) => {
   config.cfg.requestSizeLimit = options.requestSizeLimit || '0.5mb';
   config.cfg.errorLogging = defaultVal(options.errorLogging, true);
 
-  const errorHandler = options.error || undefined;
+  config.handler = { error: undefined };
 
-  config.handler = {};
-  config.handler.error = errorHandler;
-
-  if (typeof config.handler.error === 'function') {
-    config.handler.error = async (controller, error, statusCode) => {
-      try {
-        return await (errorHandler(controller, error, statusCode));
-      } catch (e) {
-        console.error(e); // eslint-disable-line no-console
+  if (typeof options.error === 'function') {
+    const errorHandler = options.error;
+    config.handler.error = (controller, error, statusCode) => (
+      new Promise(resolve => resolve(errorHandler(controller, error, statusCode))).catch((e) => {
+        console.error('Error while handling error:', e); // eslint-disable-line no-console
 
         if (controller && controller.finisher) {
           controller.finisher.error('An error has occurred.');
         }
 
         return false;
-      }
-    };
+      })
+    );
   }
 
   config.cfg.viewHelpers = options.viewHelpers || {};
 
-  if (!app) {
-    app = express();
-  }
-
+  if (!app) app = express();
   config.app = app;
 
   if (options.logging) {
     app.use(require('morgan')('short', {})); // eslint-disable-line global-require
   }
 
-  const redirectOpts = defaultVal(options.redirectNakedToWWW, false);
-
-  if (redirectOpts !== false) {
-    const opts = typeof redirectOpts === 'object' ? redirectOpts : {};
-    app.use(require('express-naked-redirect')(opts)); // eslint-disable-line global-require
+  let redirectOpts = options.redirectNakedToWWW;
+  if (redirectOpts) {
+    if (typeof redirectOpts !== 'object' && typeof redirectOpts !== 'function') redirectOpts = {};
+    app.use(require('express-naked-redirect')(redirectOpts)); // eslint-disable-line global-require
   }
 
   if (defaultVal(options.compression, true)) {
@@ -136,33 +128,36 @@ module.exports = (options) => {
   }
 
   if (defaultVal(options.databaseDsn, [])) {
-    config.cfg.databaseDsn = options.databaseDsn;
+    config.cfg.databaseDsn = options.databaseDsn || [];
   }
 
-  app.use('/dp', express.static(path.resolve(__dirname, '/lib/static')));
+  if (!options.suppressDefaultStaticFiles) {
+    app.use('/dp', express.static(path.resolve(__dirname, '/lib/static')));
+  }
 
   if (options.static) {
-    let paths = options.static;
-
-    if (typeof (paths) !== 'object') {
-      paths = [paths];
-    }
-
-    paths.forEach((e) => {
-      app.use(express.static(`${options.apppath}/${e}`));
-    });
+    const paths = options.static;
+    (typeof paths === 'object' ? paths : [paths])
+      .forEach(e => app.use(express.static(`${options.apppath}/${e}`)));
   }
 
-  const listen = (port) => {
-    if (options.logging) {
-      console.log(`Listening .. ${port}`); // eslint-disable-line no-console
-    }
-
-    return app.listen(port);
-  };
-
   if (options.port && config.mode !== 'job') {
-    listen(options.port);
+    const httpServer = app.listen(options.port);
+    if (options.logging) {
+      httpServer.on('listening', () => {
+        const boundAddr = httpServer.address();
+        let addrRepr = boundAddr;
+        if (boundAddr && boundAddr.family) {
+          const { port, family, address } = boundAddr;
+          switch (family) {
+            case 'IPv4': addrRepr = `http://${address}:${port}/`; break;
+            case 'IPv6': addrRepr = `http://[${address}]:${port}/`; break;
+            default: break;
+          }
+        }
+        console.log('Listening on', addrRepr); // eslint-disable-line no-console
+      });
+    }
   }
 
   config.view = require('./lib/view')(config); // eslint-disable-line global-require
@@ -172,7 +167,7 @@ module.exports = (options) => {
 
   const dp = {
     app,
-    listen,
+    listen: app.listen.bind(app),
   };
 
   // Assign config when test mode enabled.
@@ -186,7 +181,7 @@ module.exports = (options) => {
   }
 
   dp.app.dp = dp;
-  return dp.app;
+  return app;
 };
 
 module.exports.Tester = require('./lib/tester'); // eslint-disable-line global-require
