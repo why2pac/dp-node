@@ -114,17 +114,22 @@ module.exports = (options) => {
   }
 
   if (defaultVal(options.session, {})) {
-    config.cfg.session = options.session || {};
-    config.cfg.session.secret = config.cfg.session.secret || 'dR@9oNp0W@r~NoD2';
-    config.cfg.session.volatility = defaultVal(config.cfg.session.volatility, false);
-    config.cfg.session.ttl = config.cfg.session.ttl || 3600 * 24 * 30;
+    const ns = options.session || {};
+    ns.secret = ns.secret || 'dR@9oNp0W@r~NoD2';
+    ns.volatility = defaultVal(ns.volatility, false);
+    ns.ttl = ns.ttl || 3600 * 24 * 30;
+    ns.signPrefix = ns.signPrefix || (options.cookie && options.cookie.signPrefix) || 's:';
+    config.cfg.session = ns;
   }
 
   if (defaultVal(options.cookie, {})) {
-    config.cfg.cookie = options.cookie || {};
-    config.cfg.cookie.secret = config.cfg.cookie.secret || 'dR@9oNp0W@r~Co0K2';
-    config.cfg.cookie.volatility = defaultVal(config.cfg.cookie.volatility, false);
-    config.cfg.cookie.ttl = config.cfg.cookie.ttl || 3600 * 24 * 30;
+    const ns = options.cookie || {};
+    ns.secret = ns.secret || 'dR@9oNp0W@r~Co0K2';
+    ns.volatility = defaultVal(ns.volatility, false);
+    ns.ttl = ns.ttl || 3600 * 24 * 30;
+    ns.signPrefix = ns.signPrefix || 's:';
+    ns.keepOnVerifyFail = ns.keepOnVerifyFail || false;
+    config.cfg.cookie = ns;
   }
 
   if (defaultVal(options.databaseDsn, [])) {
@@ -180,7 +185,7 @@ module.exports = (options) => {
     return require('./lib/job')(config); // eslint-disable-line global-require
   }
 
-  dp.app.dp = dp;
+  app.dp = dp;
   return app;
 };
 
