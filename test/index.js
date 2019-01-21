@@ -223,6 +223,15 @@ require('../index').Tester.init()((req) => {
     });
   });
 
+  describe('Helper', () => {
+    it('Simple helper test.', (done) => {
+      req().get('/helper/simple').expect(200, 'done', done);
+    });
+    it('Helper delegate test.', (done) => {
+      req().get('/helper/delegate').expect(200, 'done', done);
+    });
+  });
+
   describe('Error Handling', () => {
     it('Response should be `This is an intended exception.`.', (done) => {
       req().get('/error/handler/throw_from_model?err=yes').expect(500, 'This is an intended exception.', done);

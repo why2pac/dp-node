@@ -11,6 +11,10 @@ module.exports = {
     assert(this.model.test.uscore.baz.koo() === 'koo');
     assert(this.model.test.uscore.foo.fao() === this.model.test.uscore.foo.far.fao);
     assert(this.model.test.uscore.one.inOne.two() === 'three');
+    assert(this.model.test.uscore.qux.fao() === this.model.test.uscore.foo.far.fao);
+    assert(this.model.test.uscore.qux.fred() === 'fred');
+    assert(this.model.test.uscore.qux.koo() === 'koo');
+    assert(this.model.test.uscore.qux.mos() === 'mos');
 
     return 'done';
   },
