@@ -570,3 +570,15 @@ require('../index').Tester.init()((req) => {
     });
   });
 }, require('./example/app.js'));
+
+require('../index').Tester.init({ isAppBind: false })((supertest) => {
+  const req = () => supertest('http://www.google.com');
+
+  describe('External Host', () => {
+    it('Is google alive?', (done) => {
+      req()
+        .get('/')
+        .expect(200, done);
+    });
+  });
+}, require('./example/app.js'), 'Supertest');
