@@ -13,7 +13,7 @@ const viewHelpers = require('./helper');
 const options = {
   apppath: __dirname,
   mode: global.mode || null,
-  port: process.env.PORT || (global.isTest ? null : 7777),
+  port: process.env.PORT || 7777,
   static: 'static',
   debug: global.optionDebug || true,
   logging: global.optionLogging || (!global.isTest),

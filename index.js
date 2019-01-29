@@ -146,7 +146,7 @@ module.exports = (options) => {
       .forEach(e => app.use(express.static(`${options.apppath}/${e}`)));
   }
 
-  if (options.port && config.mode !== 'job') {
+  if (!global.isTest && options.port && config.mode !== 'job') {
     const httpServer = app.listen(options.port);
     if (options.logging) {
       httpServer.on('listening', () => {
