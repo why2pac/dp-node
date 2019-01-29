@@ -156,6 +156,24 @@ require('../index').Tester.init()((req) => {
           });
         });
       });
+
+      describe('Bubbling', () => {
+        it('Response should be `propagation` when not configured bubbling option.', (done) => {
+          req().get('/prefix/born/bone').expect(200, 'propagation', done);
+        });
+
+        it('Response should be `propagatable` when not configured bubbling option.', (done) => {
+          req().get('/prefix/will/smith').expect(200, 'propagatable', done);
+        });
+
+        it('Response should be `bubbling` when configured bubbling option.', (done) => {
+          req().get('/prefix/will/smith/prefix/james/bond').expect(200, 'bubbling', done);
+        });
+
+        it('Response should be `child` when configured bubbling option.', (done) => {
+          req().get('/prefix/will/smith/prefix/james/bond/prefix/jone/doe').expect(200, 'child', done);
+        });
+      });
     });
 
     describe('Session', () => {
