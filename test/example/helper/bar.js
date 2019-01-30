@@ -18,4 +18,5 @@ module.exports = {
   moo() {
     return this.helper.bar.meow;
   },
+  james: helper => helper.bar.meow === 'moo',
 };
