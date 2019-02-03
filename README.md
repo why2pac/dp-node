@@ -59,7 +59,7 @@ App
 
 ```Javascript
 module.exports = {
-    async get() => {
+    async get() {
         /*
          *  `this` exports: {
          *     raw: {
