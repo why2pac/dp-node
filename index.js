@@ -6,6 +6,7 @@ const path = require('path');
 |*
 |* @param {Object} [options] {
 |         app: Object, Express App.
+|         trustProxy: Booelan, truxy proxy, Default is null.
 |         apppath: String, Application Absolute Path [Required]
 |         controllerPath: String, View Path, Default is 'controller'
 |         viewPath: String, View Path, Default is 'view'
@@ -144,6 +145,10 @@ module.exports = (options) => {
     const paths = options.static;
     (typeof paths === 'object' ? paths : [paths])
       .forEach(e => app.use(express.static(`${options.apppath}/${e}`)));
+  }
+
+  if (options.trustProxy) {
+    app.enable('trust proxy', typeof options.trustProxy === 'boolean' ? undefined : options.trustProxy);
   }
 
   if (!global.isTest && options.port && config.mode !== 'job') {

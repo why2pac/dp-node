@@ -20,6 +20,7 @@ const options = {
   compression: global.optionCompression || false,
   redirectNakedToWWW: global.optionRedirectNakedToWWW || true,
   requestSizeLimit: global.optionsRequestSizeLimit || '1MB',
+  trustProxy: false,
   viewHelpers,
   session: {
     driver: 'redis',
