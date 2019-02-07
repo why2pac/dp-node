@@ -6,7 +6,6 @@ require('handlebars');
 require('handlebars-helpers');
 require('handlebars-helper-repeat');
 require('promised-handlebars');
-require('fs-extra');
 require('morgan');
 require('compression');
 require('helmet');

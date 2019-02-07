@@ -6,7 +6,7 @@ const path = require('path');
 |*
 |* @param {Object} [options] {
 |         app: Object, Express App.
-|         trustProxy: Booelan, truxy proxy, Default is null.
+|         trustProxy: Booelan, trust proxy, Default is null.
 |         apppath: String, Application Absolute Path [Required]
 |         controllerPath: String, View Path, Default is 'controller'
 |         viewPath: String, View Path, Default is 'view'
@@ -106,8 +106,8 @@ module.exports = (options) => {
   }
 
   if (options.preMiddlewares) {
-    const preMiddlewares = Array.isArray(options.preMiddlewares)
-      ? options.preMiddlewares : [options.preMiddlewares];
+    let { preMiddlewares } = options;
+    if (!Array.isArray(preMiddlewares)) preMiddlewares = [preMiddlewares];
 
     for (let i = 0; i < preMiddlewares.length; i += 1) {
       app.use(preMiddlewares[i]);
@@ -119,6 +119,8 @@ module.exports = (options) => {
     ns.secret = ns.secret || 'dR@9oNp0W@r~NoD2';
     ns.volatility = defaultVal(ns.volatility, false);
     ns.ttl = ns.ttl || 3600 * 24 * 30;
+    ns.cookieName = ns.cookieName || 'DSESSIONID';
+    ns.keyLength = ns.keyLength || 32;
     ns.signPrefix = ns.signPrefix || (options.cookie && options.cookie.signPrefix) || 's:';
     config.cfg.session = ns;
   }
@@ -152,7 +154,10 @@ module.exports = (options) => {
   }
 
   if (!global.isTest && options.port && config.mode !== 'job') {
-    const httpServer = app.listen(options.port);
+    let listenOpts = options.port;
+    if (!Array.isArray(listenOpts)) listenOpts = [listenOpts];
+
+    const httpServer = app.listen(...listenOpts);
     if (options.logging) {
       httpServer.on('listening', () => {
         const boundAddr = httpServer.address();
