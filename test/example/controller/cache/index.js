@@ -38,6 +38,9 @@ module.exports = {
     assert(await this.cache.get(key1) === null);
     assert(await this.cache('mem').get(key1) === null);
 
+    await this.model.test.cache.doIt();
+    await this.helper.cache.doIt();
+
     return 'done';
   },
 };
