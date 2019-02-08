@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   path: '/it-is-a-replaced-path-for-all-methods',
   get: (controller) => {

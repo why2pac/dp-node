@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   getPath: '/replaced-path-with-suffix',
   getSuffix: '/:id(\\d+)?',

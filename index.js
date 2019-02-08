@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const path = require('path');
 
@@ -47,10 +49,9 @@ module.exports = (options) => {
   const config = {};
 
   const defaultVal = (val, defVal) => (typeof val === 'undefined' ? defVal : val);
-  const arrayToObj = (arr, key) => (Array.isArray(arr) ? arr.reduce((acc, cur) => {
-    acc[cur[key]] = cur;
-    return acc;
-  }, {}) : arr);
+  const arrayToObj = (arr, key) => (Array.isArray(arr) ? arr.reduce((o, value) => (
+    Object.defineProperty(o, value[key], { configurable: true, enumerable: true, value })
+  ), {}) : arr);
 
   config.mode = (options.mode || 'web').toLowerCase();
   config.debug = defaultVal(options.debug, false);

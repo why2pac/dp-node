@@ -1,3 +1,5 @@
+'use strict';
+
 const CustomError = function CustomError(message) {
   Error.captureStackTrace(this, this.constructor);
 

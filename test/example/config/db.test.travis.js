@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   key: 'testTravis',
   client: 'mysql',

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   __: (req, res, next) => { // eslint-disable-line no-unused-vars
     res.status(200).send('file/child3/middleware');
