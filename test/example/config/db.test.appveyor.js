@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   key: 'testAppveyor',
   client: 'mysql',

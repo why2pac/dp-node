@@ -1,3 +1,5 @@
+'use strict';
+
 const local = require('./db.local');
 const localOpt = require('./db.local.opt');
 const testAppveyor = require('./db.test.appveyor');

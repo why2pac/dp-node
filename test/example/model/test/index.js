@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   underscoreCalc(a, b) {
     return this._.underscore.calc(this._.uscore.baz.ret(a), b);
