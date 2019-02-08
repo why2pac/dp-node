@@ -183,6 +183,13 @@ require('../index').Tester.init()((req) => {
       });
     });
 
+    describe('Cache', () => {
+      it('Simple cache test.', function anonymous(done) {
+        this.timeout(5000);
+        req().get('/cache').expect(200, 'done', done);
+      });
+    });
+
     describe('Error Handling', () => {
       describe('Finisher', () => {
         it('Response should be `NOTFOUND` with 404 status code.', (done) => {

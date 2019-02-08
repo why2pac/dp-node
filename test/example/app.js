@@ -7,6 +7,7 @@ if (process.env.APPVEYOR) {
 }
 
 const databaseDsn = require('./config/db');
+const cacheDsn = require('./config/cache');
 const error = require('./error');
 const viewHelpers = require('./helper');
 
@@ -36,6 +37,7 @@ const options = {
   cookie: {
     secret: 'cookie-secret-modify-this-value-in-production',
   },
+  cacheDsn,
   databaseDsn: Object.keys(databaseDsn)
     .filter(e => e.startsWith(global.stage))
     .map(e => databaseDsn[e]),

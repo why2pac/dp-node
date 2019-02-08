@@ -24,6 +24,7 @@ const path = require('path');
 |         static: [String], Static file paths.
 |         redirectNakedToWWW: Boolean or Object,
 |           Whether redirect naked domain to www or not, Default is false.
+|         cacheDsn: ([)Object(]), Pre-defined cache dsns, Default is empty.
 |         databaseDsn: [Object], Pre-defined database dsn key as `key`, Default is empty.
 |         mode: String, Supported values are `web` or `job`, Default is `web`.
 |         session: {
@@ -46,6 +47,10 @@ module.exports = (options) => {
   const config = {};
 
   const defaultVal = (val, defVal) => (typeof val === 'undefined' ? defVal : val);
+  const arrayToObj = (arr, key) => (Array.isArray(arr) ? arr.reduce((acc, cur) => {
+    acc[cur[key]] = cur;
+    return acc;
+  }, {}) : arr);
 
   config.mode = (options.mode || 'web').toLowerCase();
   config.debug = defaultVal(options.debug, false);
@@ -135,6 +140,10 @@ module.exports = (options) => {
     config.cfg.cookie = ns;
   }
 
+  if (defaultVal(options.cacheDsn, {})) {
+    config.cfg.cacheDsn = arrayToObj(options.cacheDsn, 'key') || {};
+  }
+
   if (defaultVal(options.databaseDsn, [])) {
     config.cfg.databaseDsn = options.databaseDsn || [];
   }
@@ -176,6 +185,7 @@ module.exports = (options) => {
   }
 
   config.view = require('./lib/view')(config); // eslint-disable-line global-require
+  config.cache = require('./lib/cache')(config); // eslint-disable-line global-require
   config.router = require('./lib/router')(config); // eslint-disable-line global-require
   config.helper = require('./lib/helper')(config); // eslint-disable-line global-require
   config.model = require('./lib/model')(config); // eslint-disable-line global-require
