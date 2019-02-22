@@ -2,6 +2,11 @@
 
 const express = require('express');
 const path = require('path');
+const viewLib = require('./lib/view');
+const cacheLib = require('./lib/cache');
+const routerLib = require('./lib/router');
+const helperLib = require('./lib/helper');
+const modelLib = require('./lib/model');
 
 /*
 |* dp for Node
@@ -50,7 +55,9 @@ module.exports = (options) => {
 
   const defaultVal = (val, defVal) => (typeof val === 'undefined' ? defVal : val);
   const arrayToObj = (arr, key) => (Array.isArray(arr) ? arr.reduce((o, value) => (
-    Object.defineProperty(o, value[key], { configurable: true, enumerable: true, value })
+    Object.defineProperty(o, value[key], {
+      value, writable: true, enumerable: true, configurable: true,
+    })
   ), {}) : arr);
 
   config.mode = (options.mode || 'web').toLowerCase();
@@ -62,7 +69,7 @@ module.exports = (options) => {
   config.cfg.view = options.apppath + (options.viewPath || '/view');
   config.cfg.minifyRemoveLineBreakWhitespace = defaultVal(
     options.minifyRemoveLineBreakWhitespace,
-    true // eslint-disable-line comma-dangle
+    true
   );
   config.cfg.requestSizeLimit = options.requestSizeLimit || '0.5mb';
   config.cfg.errorLogging = defaultVal(options.errorLogging, true);
@@ -73,7 +80,7 @@ module.exports = (options) => {
     const errorHandler = options.error;
     config.handler.error = (controller, error, statusCode) => (
       new Promise(resolve => resolve(errorHandler(controller, error, statusCode))).catch((e) => {
-        console.error('Error while handling error:', e); // eslint-disable-line no-console
+        console.error('Error while handling error:', e);
 
         if (controller && controller.finisher) {
           controller.finisher.error('An error has occurred.');
@@ -90,25 +97,25 @@ module.exports = (options) => {
   config.app = app;
 
   if (options.logging) {
-    app.use(require('morgan')('short', {})); // eslint-disable-line global-require
+    app.use(require('morgan')('short', {}));
   }
 
   let redirectOpts = options.redirectNakedToWWW;
   if (redirectOpts) {
     if (typeof redirectOpts !== 'object' && typeof redirectOpts !== 'function') redirectOpts = {};
-    app.use(require('express-naked-redirect')(redirectOpts)); // eslint-disable-line global-require
+    app.use(require('express-naked-redirect')(redirectOpts));
   }
 
   if (defaultVal(options.compression, true)) {
-    app.use(require('compression')()); // eslint-disable-line global-require
+    app.use(require('compression')());
   }
 
   if (defaultVal(options.enhanceSecurity, true)) {
-    app.use(require('helmet')()); // eslint-disable-line global-require
+    app.use(require('helmet')());
   }
 
   if (defaultVal(options.cookieEnabled, true)) {
-    app.use(require('cookie-parser')()); // eslint-disable-line global-require
+    app.use(require('cookie-parser')());
   }
 
   if (options.preMiddlewares) {
@@ -180,16 +187,16 @@ module.exports = (options) => {
             default: break;
           }
         }
-        console.log('Listening on', addrRepr); // eslint-disable-line no-console
+        console.log('Listening on', addrRepr);
       });
     }
   }
 
-  config.view = require('./lib/view')(config); // eslint-disable-line global-require
-  config.cache = require('./lib/cache')(config); // eslint-disable-line global-require
-  config.router = require('./lib/router')(config); // eslint-disable-line global-require
-  config.helper = require('./lib/helper')(config); // eslint-disable-line global-require
-  config.model = require('./lib/model')(config); // eslint-disable-line global-require
+  config.view = viewLib(config);
+  config.cache = cacheLib(config);
+  config.router = routerLib(config);
+  config.helper = helperLib(config);
+  config.model = modelLib(config);
 
   const dp = {
     app,
@@ -203,11 +210,11 @@ module.exports = (options) => {
 
   // for Job mode.
   if (config.mode === 'job') {
-    return require('./lib/job')(config); // eslint-disable-line global-require
+    return require('./lib/job')(config);
   }
 
   app.dp = dp;
   return app;
 };
 
-module.exports.Tester = require('./lib/tester'); // eslint-disable-line global-require
+module.exports.Tester = require('./lib/tester');

@@ -37,7 +37,7 @@ module.exports = {
       resPromised,
       pgPage,
       pgRpp,
-      this.grouping(['pfx']) // eslint-disable-line comma-dangle
+      this.grouping(['pfx'])
     );
 
     assert(pg[0]);

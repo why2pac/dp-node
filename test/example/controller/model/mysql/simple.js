@@ -4,10 +4,11 @@ const assert = require('assert');
 
 module.exports = {
   async get() {
-    var create = await this.model.test.createTable() // eslint-disable-line
+    /* eslint-disable no-unused-vars */
+    const create = await this.model.test.createTable();
     const insert = await this.model.test.insertRecord();
     const inserted = await this.model.test.inquiryRecord();
-    var created2 = await this.model.test.knex.createTable() // eslint-disable-line
+    const created2 = await this.model.test.knex.createTable();
 
     assert(insert.insertId);
     assert(inserted.id && inserted.value);

@@ -6,11 +6,11 @@ module.exports = async (controller, error, statusCode) => {
   // for async-await test
   const res = await controller.model.test.dummy();
 
-  assert(res && res['1'] === 1);
+  assert(res && res[1] === 1);
 
   // from Job exception.
   if (error.name === 'DPJobError') {
-    console.error('job exception'); // eslint-disable-line no-console
+    console.error('job exception');
     return;
   }
 

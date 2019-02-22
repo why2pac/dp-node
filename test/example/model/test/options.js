@@ -72,7 +72,8 @@ module.exports = {
         .whereIn('value', [new Fn(1000), new Fn(1004)]);
 
       throw Error('No!');
-    } catch (_) { // eslint-disable-line no-empty
+    } catch (_) {
+      // dismiss
     }
 
     assert((await db.knex(`${global.stage}Opt`)
