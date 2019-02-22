@@ -8,6 +8,6 @@ module.exports = {
     return this._;
   },
   koo() {
-    return this.__.bar.koo; // eslint-disable-line no-underscore-dangle
+    return this.__.bar.koo;
   },
 };

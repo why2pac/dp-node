@@ -5,6 +5,6 @@ module.exports = {
     return a + b;
   },
   dblUnderscore(a, b) {
-    return this.__.underscoreCalc(a, b); // eslint-disable-line no-underscore-dangle
+    return this.__.underscoreCalc(a, b);
   },
 };

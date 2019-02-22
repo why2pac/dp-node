@@ -12,5 +12,5 @@ require('../app')(async (dp) => {
   assert(insert.insertId);
   assert(inserted.id && inserted.value);
 
-  console.log('done'); // eslint-disable-line no-console
+  console.log('done');
 });

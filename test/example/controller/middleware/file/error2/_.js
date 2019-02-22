@@ -1,14 +1,21 @@
 'use strict';
 
-const CustomError = function CustomError(message) {
+const util = require('util');
+
+function CustomError(message) {
   Error.captureStackTrace(this, this.constructor);
 
-  this.name = this.constructor.name;
   this.message = message;
-};
+}
+util.inherits(CustomError, Error);
 
-require('util').inherits(CustomError, Error);
+Object.defineProperty(CustomError.prototype, 'name', {
+  value: 'CustomError',
+  writable: true,
+  enumerable: false,
+  configurable: true,
+});
 
-module.exports = (req, res, next) => { // eslint-disable-line no-unused-vars
+module.exports = (_req, _res, _next) => {
   throw new CustomError('/middleware/file/error2/middleware');
 };

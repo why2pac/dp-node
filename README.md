@@ -20,8 +20,8 @@ $ npm install dp-node
 
 ## Features
 
-  * Focus on faster development.
-  * Async/Await ready.
+  * Rapid prototyping
+  * async / await ready
 
 ## Quick Start
 

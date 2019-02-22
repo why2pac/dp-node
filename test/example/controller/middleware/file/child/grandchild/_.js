@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = (req, res, next) => { // eslint-disable-line no-unused-vars
-  res.async((dp) => { // eslint-disable-line no-unused-vars
+module.exports = (req, res, _next) => {
+  res.async((_dp) => {
     res.status(200).send('file/child/grandchild/middleware');
   });
 };
