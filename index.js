@@ -7,6 +7,7 @@ const cacheLib = require('./lib/cache');
 const routerLib = require('./lib/router');
 const helperLib = require('./lib/helper');
 const modelLib = require('./lib/model');
+const Signer = require('./lib/signer');
 
 /*
 |* dp for Node
@@ -36,15 +37,18 @@ const modelLib = require('./lib/model');
 |         mode: String, Supported values are `web` or `job`, Default is `web`.
 |         session: {
 |             driver: String, ENUM('redis'), Session Driver, Default is undefined, disabled.
-|             secret: String, Session Secret, Default is dp provided value.
-|             ttl: Integer, Time to alive for each session key-value, Default is 3600*24*30
+|             algorithm: String, Hash algorithm for signing Session IDs, Default is 'sha256'.
+|             secret: String, Session secret key for signing, Default is dp provided value.
+|             signPrefix: String, Prefix for all signed Session IDs, Default is cookie.signPrefix.
+|             ttl: Int?, Time-to-live for cookies or null for session, Default is 3600*24*30.
 |             volatility: Boolean, Whether if use session cookie or not, Default is false.
 |             connection: Object, Options for Driver, Default is empty object({}).
 |         }
 |         cookie: {
-|             secret: String, Cookie Secret, Default is dp provided value.
-|             ttl: Integer, Time to alive for each cookie key-value, Default is 3600*24*30
-|             volatility: Boolean, Whether if use session cookie or not, Default is false.
+|             algorithm: String, Hash algorithm for signing cookies, Default is 'sha256'.
+|             secret: String, Cookie secret key for signing, Default is dp provided value.
+|             signPrefix: String, Prefix for all signed cookies, Default is 's:'.
+|             ttl: Int?, Time-to-live for cookies or null for session, Default is 3600*24*30.
 |         }
 |     }
 |*
@@ -129,23 +133,42 @@ module.exports = (options) => {
 
   if (defaultVal(options.session, {})) {
     const ns = options.session || {};
-    ns.secret = ns.secret || 'dR@9oNp0W@r~NoD2';
-    ns.volatility = defaultVal(ns.volatility, false);
-    ns.ttl = ns.ttl || 3600 * 24 * 30;
-    ns.cookieName = ns.cookieName || 'DSESSIONID';
-    ns.keyLength = ns.keyLength || 32;
-    ns.signPrefix = ns.signPrefix || (options.cookie && options.cookie.signPrefix) || 's:';
-    config.cfg.session = ns;
+    let isSessionCookie = ns.volatility;
+    if (typeof isSessionCookie !== 'undefined') {
+      console.warn('dp-node: options.session.volatility is deprecated. Use options.session.ttl = null instead.');
+    } else {
+      isSessionCookie = ns.ttl === null;
+    }
+    config.cfg.session = {
+      driver: ns.driver,
+      connection: ns.connection,
+      ttlMs: isSessionCookie ? null : (ns.ttl || 3600 * 24 * 30) * 1e3,
+      cookieName: ns.cookieName || 'DSESSIONID',
+      keyLength: ns.keyLength || 32,
+      signer: new Signer(
+        ns.algorithm || 'sha256',
+        ns.secret || 'dR@9oNp0W@r~NoD2',
+        ns.signPrefix || (options.cookie && options.cookie.signPrefix) || 's:'
+      ),
+    };
   }
 
   if (defaultVal(options.cookie, {})) {
     const ns = options.cookie || {};
-    ns.secret = ns.secret || 'dR@9oNp0W@r~Co0K2';
-    ns.volatility = defaultVal(ns.volatility, false);
-    ns.ttl = ns.ttl || 3600 * 24 * 30;
-    ns.signPrefix = ns.signPrefix || 's:';
-    ns.keepOnVerifyFail = ns.keepOnVerifyFail || false;
-    config.cfg.cookie = ns;
+    let isSessionCookie = ns.volatility;
+    if (typeof isSessionCookie !== 'undefined') {
+      console.warn('dp-node: options.cookie.volatility is deprecated. Use options.cookie.ttl = null instead.');
+    } else {
+      isSessionCookie = ns.ttl === null;
+    }
+    config.cfg.cookie = {
+      ttlMs: isSessionCookie ? null : (ns.ttl || 3600 * 24 * 30) * 1e3,
+      signer: new Signer(
+        ns.algorithm || 'sha256',
+        ns.secret || 'dR@9oNp0W@r~Co0K2',
+        ns.signPrefix || 's:'
+      ),
+    };
   }
 
   if (defaultVal(options.cacheDsn, {})) {
@@ -162,7 +185,7 @@ module.exports = (options) => {
 
   if (options.static) {
     const paths = options.static;
-    (typeof paths === 'object' ? paths : [paths])
+    (Array.isArray(paths) ? paths : [paths])
       .forEach(e => app.use(express.static(`${options.apppath}/${e}`)));
   }
 
@@ -170,7 +193,7 @@ module.exports = (options) => {
     app.enable('trust proxy', typeof options.trustProxy === 'boolean' ? undefined : options.trustProxy);
   }
 
-  if (!global.isTest && options.port && config.mode !== 'job') {
+  if (!global.isTest && options.port != null && config.mode !== 'job') {
     let listenOpts = options.port;
     if (!Array.isArray(listenOpts)) listenOpts = [listenOpts];
 
@@ -178,14 +201,11 @@ module.exports = (options) => {
     if (options.logging) {
       httpServer.on('listening', () => {
         const boundAddr = httpServer.address();
-        let addrRepr = boundAddr;
-        if (boundAddr && boundAddr.family) {
-          const { port, family, address } = boundAddr;
-          switch (family) {
-            case 'IPv4': addrRepr = `http://${address}:${port}/`; break;
-            case 'IPv6': addrRepr = `http://[${address}]:${port}/`; break;
-            default: break;
-          }
+        let addrRepr;
+        switch (boundAddr && boundAddr.family) {
+          case 'IPv4': addrRepr = `http://${boundAddr.address}:${boundAddr.port}/`; break;
+          case 'IPv6': addrRepr = `http://[${boundAddr.address}]:${boundAddr.port}/`; break;
+          default: addrRepr = boundAddr; break;
         }
         console.log('Listening on', addrRepr);
       });

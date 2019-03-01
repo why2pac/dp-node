@@ -285,43 +285,36 @@ require('../index').Tester.init()((req) => {
   });
 
   describe('Job', () => {
-    it('Response should be `done` for simple job test.', function anonymous(done) {
+    it('Response should be `done` for simple job test.', function anonymous() {
       this.timeout(5000);
 
       const jobTest = new CliTest();
-      jobTest.exec('node test/example/job/test.js').then((res) => {
+      return jobTest.exec('node test/example/job/test.js').then((res) => {
         assert(String(res.stdout) === 'done');
-        done();
       });
     });
 
-    it('Response should be `job exception` for intended exception.', function anonymous(done) {
+    it('Response should be `job exception` for intended exception.', function anonymous() {
       this.timeout(5000);
 
-      const jobTest = new CliTest();
-      jobTest.exec('node test/example/job/test_error.js').then((res) => {
+      return new CliTest().exec('node test/example/job/test_error.js').then((res) => {
         assert(String(res.stderr).indexOf('job exception') !== -1);
-        done();
       });
     });
 
-    it('Response should be `done` for async job test.', function anonymous(done) {
+    it('Response should be `done` for async job test.', function anonymous() {
       this.timeout(5000);
 
-      const jobTest = new CliTest();
-      jobTest.exec('node test/example/job/async_job.js').then((res) => {
+      return new CliTest().exec('node test/example/job/async_job.js').then((res) => {
         assert(String(res.stdout) === 'done');
-        done();
       });
     });
 
-    it('Response should be `rendered` for rendering a view.', function anonymous(done) {
+    it('Response should be `rendered` for rendering a view.', function anonymous() {
       this.timeout(5000);
 
-      const jobTest = new CliTest();
-      jobTest.exec('node test/example/job/render_view.js').then((res) => {
+      return new CliTest().exec('node test/example/job/render_view.js').then((res) => {
         assert(String(res.stdout) === 'rendered');
-        done();
       });
     });
   });
@@ -597,6 +590,116 @@ require('../index').Tester.init()((req) => {
     });
   });
 }, require('./example/app.js'));
+
+describe('Crypto signer', () => {
+  const Signer = require('../lib/signer');
+  const algos = ['sha224', 'sha256', 'sha384', 'sha512', 'ripemd160'];
+  const keys = [
+    'Test signer secret key',
+    'Test signer secret key but with a pretty long string for secret larger than a block',
+    '\u2b1a\u4d3c\u6f5e\u8170\ua392\uc5b4\ue7d6\u09f8',
+    Buffer.from('Raw buffer key'),
+    Buffer.from('Raw buffer key that is actually an ASCII '
+                + 'but with a very long key still larger than a usual block'),
+    Buffer.from([
+      0x1a, 0x2b, 0x3c, 0x4d, 0x5e, 0x6f, 0x70, 0x81,
+      0x92, 0xa3, 0xb4, 0xc5, 0xd6, 0xe7, 0xf8, 0x09,
+    ]),
+  ];
+  const prefixes = ['', 's:', '\uD8FD', '\uD800\uDC00', 'af;cX\0\xFF', '\uFFFF', 'Lorem ipsum'];
+  function forEachSigners(f) {
+    algos.forEach(a => keys.forEach(k => prefixes.forEach(p => f(new Signer(a, k, p)))));
+  }
+  const epcDat = new Date(0);
+  const pstDat = new Date(1234);
+  const futTim = 8.64e15;
+  const futDat = new Date(futTim);
+  const testString = 'The*quick brown fox jumps over@the~lazy#dog';
+  it('should refuse verifying outright invalid strings', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('') === undefined);
+      assert(sgr.unsign('key') === undefined);
+      assert(sgr.unsign('', testString) === null);
+      assert(sgr.unsign('key', testString) === null);
+      assert(sgr.unsign('', testString, true) === testString);
+      assert(sgr.unsign('key', testString, true) === testString);
+    });
+  });
+  it('should verify strings without expiry date', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', testString)) === testString);
+      assert(sgr.unsign('key', sgr.sign('key', testString)) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString)) === testString);
+    });
+  });
+  it('should verify empty strings without expiry date', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', '')) === '');
+      assert(sgr.unsign('key', sgr.sign('key', '')) === '');
+      assert(sgr.unsign('key=', sgr.sign('key=', '')) === '');
+    });
+  });
+  it('should verify strings with expiry date in the future', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', testString, futDat)) === testString);
+      assert(sgr.unsign('key', sgr.sign('key', testString, futDat)) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, futDat)) === testString);
+      assert(sgr.unsign('', sgr.sign('', testString, futTim)) === testString);
+      assert(sgr.unsign('key', sgr.sign('key', testString, futTim)) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, futTim)) === testString);
+    });
+  });
+  it('should verify strings with expiry date in the future', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', '', futDat)) === '');
+      assert(sgr.unsign('key', sgr.sign('key', '', futDat)) === '');
+      assert(sgr.unsign('key=', sgr.sign('key=', '', futDat)) === '');
+      assert(sgr.unsign('', sgr.sign('', '', futTim)) === '');
+      assert(sgr.unsign('key', sgr.sign('key', '', futTim)) === '');
+      assert(sgr.unsign('key=', sgr.sign('key=', '', futTim)) === '');
+    });
+  });
+  it('should not verify expired strings (epoch)', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', testString, epcDat)) === null);
+      assert(sgr.unsign('key', sgr.sign('key', testString, epcDat)) === null);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, epcDat)) === null);
+      assert(sgr.unsign('', sgr.sign('', testString, 0)) === null);
+      assert(sgr.unsign('key', sgr.sign('key', testString, 0)) === null);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, 0)) === null);
+    });
+  });
+  it('should not verify expired strings', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', testString, pstDat)) === null);
+      assert(sgr.unsign('key', sgr.sign('key', testString, pstDat)) === null);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, pstDat)) === null);
+      assert(sgr.unsign('', sgr.sign('', testString, 1234)) === null);
+      assert(sgr.unsign('key', sgr.sign('key', testString, 1234)) === null);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, 1234)) === null);
+    });
+  });
+  it('should pass along expired strings anyway on unsafe mode (epoch)', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('', sgr.sign('', testString, epcDat), true) === testString);
+      assert(sgr.unsign('key', sgr.sign('key', testString, epcDat), true) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, epcDat), true) === testString);
+      assert(sgr.unsign('', sgr.sign('', testString, 0), true) === testString);
+      assert(sgr.unsign('key', sgr.sign('key', testString, 0), true) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, 0), true) === testString);
+      assert(sgr.unsign('', sgr.sign('', testString, pstDat), true) === testString);
+    });
+  });
+  it('should pass along expired strings anyway on unsafe mode', () => {
+    forEachSigners((sgr) => {
+      assert(sgr.unsign('key', sgr.sign('key', testString, pstDat), true) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, pstDat), true) === testString);
+      assert(sgr.unsign('', sgr.sign('', testString, 1234), true) === testString);
+      assert(sgr.unsign('key', sgr.sign('key', testString, 1234), true) === testString);
+      assert(sgr.unsign('key=', sgr.sign('key=', testString, 1234), true) === testString);
+    });
+  });
+});
 
 require('../index').Tester.init({ isAppBind: false })((supertest) => {
   const req = () => supertest('https://duckduckgo.com');
