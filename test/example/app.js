@@ -28,8 +28,7 @@ const options = {
   session: {
     driver: 'redis',
     secret: 'session-secret-text',
-    ttl: 3,
-    volatility: true,
+    ttl: null,
     connection: {
       host: '127.0.0.1',
     },
