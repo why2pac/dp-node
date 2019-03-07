@@ -197,10 +197,10 @@ module.exports = (options) => {
     let listenOpts = options.port;
     if (!Array.isArray(listenOpts)) listenOpts = [listenOpts];
 
-    const httpServer = app.listen(...listenOpts);
+    app.server = app.listen(...listenOpts);
     if (options.logging) {
-      httpServer.on('listening', () => {
-        const boundAddr = httpServer.address();
+      app.server.on('listening', () => {
+        const boundAddr = app.server.address();
         let addrRepr;
         switch (boundAddr && boundAddr.family) {
           case 'IPv4': addrRepr = `http://${boundAddr.address}:${boundAddr.port}/`; break;
