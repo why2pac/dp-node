@@ -140,7 +140,7 @@ module.exports = (options) => {
       isSessionCookie = ns.ttl === null;
     }
     config.cfg.session = {
-      driver: ns.driver,
+      driver: ns.driver || 'stub',
       connection: ns.connection,
       ttlMs: isSessionCookie ? null : (ns.ttl || 3600 * 24 * 30) * 1e3,
       cookieName: ns.cookieName || 'DSESSIONID',
