@@ -62,6 +62,7 @@
     "redis": "^2.8.0"
   },
   "devDependencies": {
+    "@types/express-serve-static-core": "^4.16.2",
     "command-line-test": "^1.0.10",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
