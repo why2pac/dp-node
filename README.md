@@ -1,6 +1,4 @@
-**THIS PROJECT IS UNDER DEVELOPMENT, DO NOT USE IN PRODUCTION.**
-----------------------------------------------------------------
-
+=======
 dp-node
 =======
 
