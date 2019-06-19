@@ -276,11 +276,17 @@ require('../index').Tester.init()((req) => {
     it('Simple view rendering test.', (done) => {
       req().get('/view/simple_render').expect(200, 'rendered', done);
     });
+
     it('include helper stub test', (done) => {
       req().get('/view/includes').expect(200, 'Hello, world!', done);
     });
+
     it('include helper stub test (unsuffixed)', (done) => {
       req().get('/view/includes_nosuffix').expect(200, 'Goodbye, world!', done);
+    });
+
+    it('date helper test', (done) => {
+      req().get('/view/helper_date').expect(200, '20000101', done);
     });
   });
 
