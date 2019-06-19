@@ -289,6 +289,10 @@ require('../index').Tester.init()((req) => {
       req().get('/view/helper_date').expect(200, '20000101', done);
     });
 
+    it('nl2br helper test', (done) => {
+      req().get('/view/helper_nl2br').expect(200, 'foo<br>\nbar', done);
+    });
+
     it('custom helper test', (done) => {
       req().get('/view/helper_custom').expect(200, 'custom-foo-helper', done);
     });
