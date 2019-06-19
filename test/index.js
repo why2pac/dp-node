@@ -288,6 +288,10 @@ require('../index').Tester.init()((req) => {
     it('date helper test', (done) => {
       req().get('/view/helper_date').expect(200, '20000101', done);
     });
+
+    it('custom helper test', (done) => {
+      req().get('/view/helper_custom').expect(200, 'custom-foo-helper', done);
+    });
   });
 
   describe('Job', () => {
