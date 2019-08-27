@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   getSuffix: '/:id(\\d+)?',
   get: (controller) => {

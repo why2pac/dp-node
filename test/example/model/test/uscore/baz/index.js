@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   ret(a) {
     return a;

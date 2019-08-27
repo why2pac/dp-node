@@ -1,5 +1,3 @@
-'use strict';
-
 const local = require('./local');
 const localOpt = require('./local.opt');
 const testAppveyor = require('./test.appveyor');

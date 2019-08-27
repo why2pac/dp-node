@@ -1,5 +1,3 @@
-'use strict';
-
 const assert = require('assert');
 const CliTest = require('command-line-test');
 
@@ -622,7 +620,7 @@ describe('Crypto signer', () => {
   ];
   const prefixes = ['', 's:', '\uD8FD', '\uD800\uDC00', 'af;cX\0\xFF', '\uFFFF', 'Lorem ipsum'];
   function forEachSigners(f) {
-    algos.forEach(a => keys.forEach(k => prefixes.forEach(p => f(new Signer(a, k, p)))));
+    algos.forEach((a) => keys.forEach((k) => prefixes.forEach((p) => f(new Signer(a, k, p)))));
   }
   const epcDat = new Date(0);
   const pstDat = new Date(1234);

@@ -1,5 +1,3 @@
-'use strict';
-
 const assert = require('assert');
 
 const Fn = function Fn(val) {
@@ -120,7 +118,7 @@ module.exports = {
     try {
       knex = db.knex(global.stage);
 
-      await knex.batchInsert('simple_test', [1, 2, 3, 4, 5].map(e => ({
+      await knex.batchInsert('simple_test', [1, 2, 3, 4, 5].map((e) => ({
         value: new Fn(e),
       })));
 
@@ -128,7 +126,7 @@ module.exports = {
     } catch (e) {
       knex = db.knex(`${global.stage}Opt`);
 
-      await knex.batchInsert('simple_test', [1, 2, 3, 4, 5].map(ee => ({
+      await knex.batchInsert('simple_test', [1, 2, 3, 4, 5].map((ee) => ({
         value: new Fn(ee),
       })));
     }

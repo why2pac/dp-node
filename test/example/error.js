@@ -1,5 +1,3 @@
-'use strict';
-
 const assert = require('assert');
 
 module.exports = async (controller, error, statusCode) => {

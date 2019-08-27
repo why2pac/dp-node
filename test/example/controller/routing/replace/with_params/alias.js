@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   _get: '/replaced-alias-path-with-suffix',
   get_: '/:id(\\d+)?',

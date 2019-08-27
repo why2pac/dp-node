@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
-  customHelper: val => `custom-${val}`,
+  customHelper: (val) => `custom-${val}`,
 };

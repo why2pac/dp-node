@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const path = require('path');
 const viewLib = require('./lib/view');
@@ -83,7 +81,7 @@ module.exports = (options) => {
   if (typeof options.error === 'function') {
     const errorHandler = options.error;
     config.handler.error = (controller, error, statusCode) => (
-      new Promise(resolve => resolve(errorHandler(controller, error, statusCode))).catch((e) => {
+      new Promise((resolve) => resolve(errorHandler(controller, error, statusCode))).catch((e) => {
         console.error('Error while handling error:', e);
 
         if (controller && controller.finisher) {
@@ -186,7 +184,7 @@ module.exports = (options) => {
   if (options.static) {
     const paths = options.static;
     (Array.isArray(paths) ? paths : [paths])
-      .forEach(e => app.use(express.static(`${options.apppath}/${e}`)));
+      .forEach((e) => app.use(express.static(`${options.apppath}/${e}`)));
   }
 
   if (options.trustProxy) {

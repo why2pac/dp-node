@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   _get: '/it-is-a-replaced-path-alias', // _get is alias for getPath
   get: (controller) => {

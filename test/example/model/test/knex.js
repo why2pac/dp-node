@@ -1,9 +1,7 @@
-'use strict';
-
 const assert = require('assert');
 
 module.exports = {
-  createTable: db => db.execute(`
+  createTable: (db) => db.execute(`
       CREATE TABLE IF NOT EXISTS simple_test_knex (
         id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         value VARCHAR(128) DEFAULT 'EMPTY',

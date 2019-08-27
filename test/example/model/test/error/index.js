@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   throwFromMethod: () => {
     throw Error('This is an intended exception.');

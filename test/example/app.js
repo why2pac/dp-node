@@ -1,5 +1,3 @@
-'use strict';
-
 global.stage = 'local';
 
 if (process.env.APPVEYOR) {
@@ -40,8 +38,8 @@ const options = {
   },
   cacheDsn,
   databaseDsn: Object.keys(databaseDsn)
-    .filter(e => e.startsWith(global.stage))
-    .map(e => databaseDsn[e]),
+    .filter((e) => e.startsWith(global.stage))
+    .map((e) => databaseDsn[e]),
 };
 
 const dp = require('../../index')(options);

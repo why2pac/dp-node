@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   _: '/it-is-a-replaced-path-for-all-methods-alias',
   get: (controller) => {

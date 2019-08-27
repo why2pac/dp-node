@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   get: async (controller) => {
     const basedate = new Date();

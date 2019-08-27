@@ -1,12 +1,10 @@
-'use strict';
-
 module.exports = {
   async barAsync() {
     return new Promise((resolve) => {
       resolve(this.__.foo.bar());
     });
   },
-  bazAsync: async helper => helper.__.foo.baz(),
+  bazAsync: async (helper) => helper.__.foo.baz(),
   boz() {
     return this.__.foo.boz;
   },
@@ -20,5 +18,5 @@ module.exports = {
   moo() {
     return this.helper.bar.meow;
   },
-  james: helper => helper.bar.meow === 'moo',
+  james: (helper) => helper.bar.meow === 'moo',
 };

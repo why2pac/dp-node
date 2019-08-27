@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   getMiddleware: (req, res, next) => {
     const token = req.get('DP-NODE-TOKEN');

@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
-  get: async controller => controller.model.test.error.throwFromMethod(),
+  get: async (controller) => controller.model.test.error.throwFromMethod(),
 };

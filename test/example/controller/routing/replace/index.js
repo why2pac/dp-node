@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   getPath: '/it-is-a-replaced-path',
   get: (controller) => {
