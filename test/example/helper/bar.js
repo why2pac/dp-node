@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   async barAsync() {
     return new Promise((resolve) => {

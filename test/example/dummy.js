@@ -1,3 +1,5 @@
+'use strict';
+
 require('express');
 require('cookie');
 require('cookie-parser');

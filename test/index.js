@@ -1,3 +1,7 @@
+/* eslint-env node, mocha */
+
+'use strict';
+
 const assert = require('assert');
 const CliTest = require('command-line-test');
 

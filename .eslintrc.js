@@ -1,12 +1,18 @@
 module.exports = {
   "extends": "airbnb-base",
   "parserOptions": {
-    "sourceType": "script"
+    "sourceType": "script",
+    "ecmaFeatures": {
+      "impliedStrict": false
+    },
   },
   "env": {
-    "jest": true
+    "node": true,
+    "browser": false,
+    "commonjs": false
   },
   "rules": {
+    "strict": ["error", "global"],
     "global-require": "off",
     "import/no-dynamic-require": "off",
     "comma-dangle": ["error", {

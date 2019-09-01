@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   getMiddlewares: [
     (req, res, next) => {

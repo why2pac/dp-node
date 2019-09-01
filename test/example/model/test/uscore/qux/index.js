@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   fao() {
     return this.__.foo.fao();

@@ -1,3 +1,5 @@
+'use strict';
+
 global.stage = 'local';
 
 if (process.env.APPVEYOR) {

@@ -1,3 +1,5 @@
+'use strict';
+
 /* global intended_exception */
 
 global.mode = 'job';

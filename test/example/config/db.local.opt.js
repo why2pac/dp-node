@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   key: 'localOpt',
   client: 'mysql',

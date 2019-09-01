@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   __: (req, res, _next) => {
     res.status(200).send('file/child3/middleware');
