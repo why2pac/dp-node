@@ -4,8 +4,8 @@
   "description": "Faster, cheaper, better web framework for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && mocha",
-    "testonly": "mocha",
+    "test": "npm run lint && mocha --bail --exit",
+    "testonly": "mocha --bail --exit",
     "check": "npm-check",
     "lint": "eslint ./",
     "lintfix": "eslint ./ --fix",
