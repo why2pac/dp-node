@@ -155,6 +155,16 @@ require('../index').Tester.init()((req) => {
             req().get(url).expect(404, done);
           });
         });
+
+        describe('Priority', () => {
+          it('Response should be higher priority path configured by dp ini.', (done) => {
+            req().get('/controller/priority/same-path').expect(200, 'foo', done);
+          });
+
+          it('Response should be higher priority path configured by controller.', (done) => {
+            req().get('/prefix/controller/config/priority/priority/same-path').expect(200, 'foo', done);
+          });
+        });
       });
 
       describe('Bubbling', () => {
