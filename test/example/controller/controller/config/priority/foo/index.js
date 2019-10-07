@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   path: '/priority/same-path',
   priority: 200,
