@@ -10,12 +10,8 @@ platform:
   - x64
 services:
   - mysql
-cache:
-  - node_modules
 install:
   - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:PLATFORM
-  - if exist node_modules npm prune
-  - if exist node_modules npm rebuild
   - npm -v
   - node -v
   - SET PATH=C:\Program Files\MySql\MySQL Server 5.7\bin\;%PATH%
