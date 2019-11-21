@@ -9,9 +9,6 @@ services:
   - mysql
   - redis-server
 sudo: false
-cache:
-  directories:
-    - node_modules
 before_install:
   # Initialization, Database
   - mysql -e 'CREATE DATABASE IF NOT EXISTS dp_node;'
