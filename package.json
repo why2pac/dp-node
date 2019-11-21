@@ -49,7 +49,7 @@
     "decamelize": "^3.2.0",
     "express": "^4.17.1",
     "express-naked-redirect": "^0.1.4",
-    "handlebars": "^4.4.5",
+    "handlebars": "^4.5.3",
     "handlebars-helper-repeat": "^2.0.0",
     "handlebars-helpers": "^0.10.0",
     "helmet": "^3.21.2",
