@@ -181,6 +181,10 @@ module.exports = (options) => {
     app.use('/dp', express.static(path.resolve(__dirname, '/lib/static')));
   }
 
+  if (options.express) {
+    options.express(app);
+  }
+
   if (options.static) {
     const paths = options.static;
     (Array.isArray(paths) ? paths : [paths])
