@@ -226,14 +226,18 @@ module.exports = (options) => {
     dp.config = config;
   }
 
-  const engine = require('./lib/job')(config);
-
   // for Job mode.
   if (config.mode === 'job') {
-    return engine;
+    return require('./lib/job')(config);
   }
 
-  app.engine = engine;
+  app.engine = {
+    helper: config.helper,
+    model: config.model,
+    view: config.view,
+    cache: config.cache,
+  };
+
   app.dp = dp;
 
   return app;
