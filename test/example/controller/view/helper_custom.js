@@ -4,6 +4,6 @@ module.exports = {
       foo: 'foo-helper',
     };
 
-    await controller.render('view/helper_custom.html', params);
+    return controller.model.test.view.helperCustom(params);
   },
 };
