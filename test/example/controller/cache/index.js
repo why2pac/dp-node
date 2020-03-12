@@ -15,6 +15,7 @@ module.exports = {
     assert(await this.cache('nine').get(key1) !== val1);
     assert(await this.cache('nine').set(key2, val2));
     assert(await this.cache('nine').get(key2) === val2);
+    assert(await this.cache('nine').conn().get(key2) !== val2);
     assert(await this.cache.set(key3, val3));
     assert(await this.cache.get(key3) === val3);
 
