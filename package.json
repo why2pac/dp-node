@@ -46,7 +46,7 @@
     "compression": "^1.7.4",
     "cookie": "0.4.0",
     "cookie-parser": "^1.4.4",
-    "decamelize": "^4.0.0",
+    "decamelize": "^3.2.0",
     "express": "^4.17.1",
     "express-naked-redirect": "^0.1.4",
     "handlebars": "^4.7.3",
