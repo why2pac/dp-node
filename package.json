@@ -48,7 +48,7 @@
     "cookie-parser": "^1.4.5",
     "decamelize": "^4.0.0",
     "express": "^4.17.1",
-    "express-naked-redirect": "^0.1.8",
+    "express-naked-redirect": "^0.1.9",
     "handlebars": "^4.7.6",
     "handlebars-helper-repeat": "^2.0.0",
     "handlebars-helpers": "^0.10.0",
