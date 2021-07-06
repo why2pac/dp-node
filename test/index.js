@@ -611,7 +611,7 @@ require('../index').Tester.init()((req) => {
       });
     });
   });
-}, require('./example/app.js'));
+}, require('./example/app'));
 
 describe('Crypto signer', () => {
   const Signer = require('../lib/signer');
@@ -732,4 +732,4 @@ require('../index').Tester.init({ isAppBind: false })((supertest) => {
       req().get('/').expect(200, done);
     });
   });
-}, require('./example/app.js'), 'Supertest');
+}, require('./example/app'), 'Supertest');
